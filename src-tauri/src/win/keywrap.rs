@@ -168,10 +168,13 @@ mod tests {
         let _g = tpm_lock();
         let dir = tempfile::tempdir().unwrap();
         let p = dir.path().join("master.key");
-        let (a, _) = load_or_create(&p, || {}).unwrap();
-        let (b, _) = load_or_create(&p, || panic!("ikinci açılış oluşturmamalı")).unwrap();
+        let (a, method) = load_or_create(&p, || {}).unwrap();
+        let (b, again) = load_or_create(&p, || panic!("ikinci açılış oluşturmamalı")).unwrap();
         assert_eq!(a.as_bytes(), b.as_bytes());
-        delete_test_key();
+        assert_eq!(method, again);
+        if method == WrapMethod::Tpm {
+            delete_test_key();
+        }
     }
 
     #[test]
