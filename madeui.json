@@ -1,0 +1,8 @@
+{
+  "registry": "https://madeui.com/r",
+  "paths": {
+    "ui": "src/components/ui",
+    "lib": "src/lib"
+  },
+  "css": "src/styles/globals.css"
+}

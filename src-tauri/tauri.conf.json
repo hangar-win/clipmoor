@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Clipmoor",
+  "version": "0.1.0",
+  "identifier": "app.clipmoor",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "panel",
+        "title": "Clipmoor",
+        "url": "index.html",
+        "width": 448,
+        "height": 640,
+        "visible": false,
+        "focus": false,
+        "decorations": false,
+        "skipTaskbar": true,
+        "alwaysOnTop": true,
+        "resizable": false,
+        "shadow": false,
+        "transparent": true,
+        "dragDropEnabled": false
+      },
+      {
+        "label": "preview",
+        "title": "Clipmoor",
+        "url": "index.html",
+        "width": 480,
+        "height": 520,
+        "visible": false,
+        "focus": false,
+        "decorations": false,
+        "skipTaskbar": true,
+        "alwaysOnTop": true,
+        "resizable": false,
+        "shadow": false,
+        "transparent": true,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src ipc: http://ipc.localhost",
+      "devCsp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["English", "Turkish"],
+        "displayLanguageSelector": false,
+        "template": "installer/installer.nsi"
+      }
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

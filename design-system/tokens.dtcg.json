@@ -1,0 +1,1603 @@
+{
+  "$description": "Clipmoor design tokens, W3C DTCG. Single source for code generation: base palette -> semantic roles (dark/light) -> component tokens. Palettes are override sets of the semantic roles; roles marked $extensions.clipmoor.customizable are user-editable, all others derive from them (see derive). Generated 2026-10-28 from the Clipmoor design system.",
+  "color": {
+    "base": {
+      "white": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "Light chip body, dark text-on-active."
+      },
+      "clear": {
+        "$type": "color",
+        "$value": "#00000000",
+        "$description": "Dark selection-edge (no edge: the yellow ring alone passes 3:1 on dark)."
+      },
+      "stock-50": {
+        "$type": "color",
+        "$value": "#F6F5F2",
+        "$description": "Stock: light ground, light text-on-active."
+      },
+      "stock-100": {
+        "$type": "color",
+        "$value": "#ECE9E2",
+        "$description": "Deeper stock: light strip and hover."
+      },
+      "stock-500": {
+        "$type": "color",
+        "$value": "#8C887F",
+        "$description": "Light hairline (chip edge, rules)."
+      },
+      "stock-600": {
+        "$type": "color",
+        "$value": "#86827A",
+        "$description": "Light frame (window edge, control outlines)."
+      },
+      "graphite-50": {
+        "$type": "color",
+        "$value": "#EDEDF0",
+        "$description": "Dark text, active edge, focus ring."
+      },
+      "graphite-100": {
+        "$type": "color",
+        "$value": "#DADADF",
+        "$description": "Dark strip text."
+      },
+      "graphite-150": {
+        "$type": "color",
+        "$value": "#D4D4D9",
+        "$description": "Dark control text."
+      },
+      "graphite-300": {
+        "$type": "color",
+        "$value": "#B5B5BC",
+        "$description": "Dark muted text."
+      },
+      "graphite-350": {
+        "$type": "color",
+        "$value": "#ABABB3",
+        "$description": "Dark strip muted text."
+      },
+      "graphite-500": {
+        "$type": "color",
+        "$value": "#6A6A74",
+        "$description": "Dark frame and hairline."
+      },
+      "graphite-600": {
+        "$type": "color",
+        "$value": "#55555C",
+        "$description": "Light muted text, light strip muted text."
+      },
+      "graphite-700": {
+        "$type": "color",
+        "$value": "#3A3A40",
+        "$description": "Light control text."
+      },
+      "graphite-750": {
+        "$type": "color",
+        "$value": "#34343C",
+        "$description": "Dark active block."
+      },
+      "graphite-800": {
+        "$type": "color",
+        "$value": "#2A2A30",
+        "$description": "Dark strip/hover; light strip text (absorbs the old #2A2A2E)."
+      },
+      "graphite-950": {
+        "$type": "color",
+        "$value": "#1B1B1E",
+        "$description": "Graphite: dark ground and chip, light text and active block."
+      },
+      "signal": {
+        "$type": "color",
+        "$value": "#FFD23F",
+        "$description": "Signal Yellow. Selection ring only."
+      },
+      "press-blue": {
+        "$type": "color",
+        "$value": "#2F55B4",
+        "$description": "Text type hue, light theme."
+      },
+      "press-blue-lift": {
+        "$type": "color",
+        "$value": "#3F67C8",
+        "$description": "Text type hue, dark theme: Press Blue lifted +0.06 OKLCH L to reach 3.26:1 on graphite-950 (was 2.52)."
+      },
+      "proof-green": {
+        "$type": "color",
+        "$value": "#178A6B",
+        "$description": "Image type hue."
+      },
+      "vermilion": {
+        "$type": "color",
+        "$value": "#D9531E",
+        "$description": "Link type hue."
+      },
+      "plate-violet": {
+        "$type": "color",
+        "$value": "#7A45C9",
+        "$description": "Code type hue, light theme."
+      },
+      "plate-violet-lift": {
+        "$type": "color",
+        "$value": "#834FD3",
+        "$description": "Code type hue, dark theme: Plate Violet lifted +0.03 OKLCH L to reach 3.29:1 on graphite-950 (was 2.88)."
+      },
+      "locked-grey": {
+        "$type": "color",
+        "$value": "#8A8A92",
+        "$description": "Locked / untyped hue."
+      },
+      "spectrum-red": {
+        "$type": "color",
+        "$value": "#E74C3C",
+        "$description": "Colour-tab key gradient stop 0 and 1."
+      },
+      "spectrum-yellow": {
+        "$type": "color",
+        "$value": "#F1C40F",
+        "$description": "Colour-tab key gradient stop 0.25."
+      },
+      "spectrum-green": {
+        "$type": "color",
+        "$value": "#2ECC71",
+        "$description": "Colour-tab key gradient stop 0.5."
+      },
+      "spectrum-blue": {
+        "$type": "color",
+        "$value": "#3498DB",
+        "$description": "Colour-tab key gradient stop 0.75."
+      },
+      "neutral-0": {
+        "$type": "color",
+        "$value": "#0A0A0A",
+        "$description": "Settings dark background, light text."
+      },
+      "neutral-1": {
+        "$type": "color",
+        "$value": "#171717",
+        "$description": "Settings dark dialog surface, dark on-danger."
+      },
+      "neutral-2": {
+        "$type": "color",
+        "$value": "#262626",
+        "$description": "Settings dark muted fill and divider."
+      },
+      "neutral-3": {
+        "$type": "color",
+        "$value": "#333333",
+        "$description": "Settings dark segment hover."
+      },
+      "neutral-4": {
+        "$type": "color",
+        "$value": "#404040",
+        "$description": "Settings dark selected segment."
+      },
+      "neutral-5": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "Settings light segment text."
+      },
+      "neutral-6": {
+        "$type": "color",
+        "$value": "#666666",
+        "$description": "Settings dark field edge (new: 3.45:1 on neutral-0)."
+      },
+      "neutral-7": {
+        "$type": "color",
+        "$value": "#6B6B6B",
+        "$description": "Settings light muted text (new: was #737373, 4.35:1 on muted)."
+      },
+      "neutral-8": {
+        "$type": "color",
+        "$value": "#8C8C8C",
+        "$description": "Settings light field edge (new: 3.36:1 on white)."
+      },
+      "neutral-9": {
+        "$type": "color",
+        "$value": "#A1A1A1",
+        "$description": "Settings dark muted text."
+      },
+      "neutral-10": {
+        "$type": "color",
+        "$value": "#AEAEAE",
+        "$description": "Settings dark segment text."
+      },
+      "neutral-11": {
+        "$type": "color",
+        "$value": "#E5E5E5",
+        "$description": "Settings light divider."
+      },
+      "neutral-12": {
+        "$type": "color",
+        "$value": "#E8E8E8",
+        "$description": "Settings light segment hover."
+      },
+      "neutral-13": {
+        "$type": "color",
+        "$value": "#F5F5F5",
+        "$description": "Settings light muted fill."
+      },
+      "neutral-14": {
+        "$type": "color",
+        "$value": "#FAFAFA",
+        "$description": "Settings dark text, light on-danger."
+      },
+      "red-light": {
+        "$type": "color",
+        "$value": "#A64C44",
+        "$description": "Settings danger, light: softened brick red, OKLCH chroma 0.24 → 0.12 (was #E7000B). 5.62:1 on white."
+      },
+      "red-dark": {
+        "$type": "color",
+        "$value": "#DA827B",
+        "$description": "Settings danger, dark: softened coral, OKLCH chroma 0.19 → 0.11 (was #FF6467). 7.03:1 on neutral-0."
+      }
+    },
+    "semantic": {
+      "dark": {
+        "ground": {
+          "$type": "color",
+          "$value": "{color.base.graphite-950}",
+          "$description": "Panel ground; also menus, dialogs, image preview, collapsed bar. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "card": {
+          "$type": "color",
+          "$value": "{color.base.graphite-950}",
+          "$description": "Item body (Chip, ListCard, CompactRow, ShelfCard). Equals ground in dark, where the card is drawn by `hairline`. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "strip": {
+          "$type": "color",
+          "$value": "{color.base.graphite-800}",
+          "$description": "Chip label strip AND every hover fill (old `hover` folded in). Derived."
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{color.base.graphite-750}",
+          "$description": "Active block: active tab, keep-open on, primary button, selected search text. Light inverts to graphite. Derived."
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "#1B1B1EB8",
+          "$description": "Dialog backdrop in both windows: ground at 72%. Derived."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base.graphite-50}",
+          "$description": "Primary text on `ground`, `card`, `strip`. 14.6:1 dark, 15.8:1 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "text-muted": {
+          "$type": "color",
+          "$value": "{color.base.graphite-300}",
+          "$description": "Tabs, placeholder, hints, footer captions, second line of ListCard, times. On `ground`/`card` (8.43 dark, 6.78 light) and `strip` (7.00 / 6.10). Derived."
+        },
+        "text-control": {
+          "$type": "color",
+          "$value": "{color.base.graphite-150}",
+          "$description": "Pills, keycaps, secondary buttons, on `ground`/`card`. Derived."
+        },
+        "text-strip": {
+          "$type": "color",
+          "$value": "{color.base.graphite-100}",
+          "$description": "Chip label-strip text on `strip`. Light value absorbs the old #2A2A2E. Derived."
+        },
+        "text-strip-muted": {
+          "$type": "color",
+          "$value": "{color.base.graphite-350}",
+          "$description": "Time and icons on the label strip, on `strip` (6.25 dark, 6.10 light). Derived."
+        },
+        "text-on-active": {
+          "$type": "color",
+          "$value": "{color.base.white}",
+          "$description": "Text and icons on `active` (12.34 dark). Derived."
+        },
+        "frame": {
+          "$type": "color",
+          "$value": "{color.base.graphite-500}",
+          "$description": "Window edge, control outlines (search, toggle, pill, keycap, notice, buttons, inputs), menu/dialog ring, scrollbar thumb. Old `frame` + `control` merged. 3.21:1 dark, 3.51:1 light on `ground`. Derived."
+        },
+        "hairline": {
+          "$type": "color",
+          "$value": "{color.base.graphite-500}",
+          "$description": "Item edge and rules (filter divider, footer rule, section rules). Old `hairline` + `rule` merged. 3.21 dark; 3.24 on light `ground`, 3.53 on white `card`. Derived."
+        },
+        "active-edge": {
+          "$type": "color",
+          "$value": "{color.semantic.dark.text}",
+          "$description": "1px edge of the active block and the active pill: always `text`."
+        },
+        "swatch-edge": {
+          "$type": "color",
+          "$value": "#FFFFFF29",
+          "$description": "1px inner edge on colour bands, swatches and image thumbnails (decorative)."
+        },
+        "selection": {
+          "$type": "color",
+          "$value": "{color.base.signal}",
+          "$description": "THE ring: 2px outline, 1px offset, on the selected item only. 11.90:1 on dark ground. Never anywhere else. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "selection-edge": {
+          "$type": "color",
+          "$value": "{color.base.clear}",
+          "$description": "Selected item's 1px border. Graphite in light because yellow on stock is 1.32:1; clear in dark."
+        },
+        "focus-ring": {
+          "$type": "color",
+          "$value": "{color.semantic.dark.text}",
+          "$description": "The single focus ring of both windows: 2px solid, drawn INSIDE the control (offset -2px); on filled controls it takes the fill's text colour 4px in. Reads ≥12:1 on every surface it lands on (ground, strip, settings-bg, settings-surface, settings-muted)."
+        },
+        "type-text": {
+          "$type": "color",
+          "$value": "{color.base.press-blue-lift}",
+          "$description": "Text items: band and tab key only. Dark lifted to 3.26:1 on ground. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-image": {
+          "$type": "color",
+          "$value": "{color.base.proof-green}",
+          "$description": "Image items: band and tab key only. 4.00 dark, 3.94 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-link": {
+          "$type": "color",
+          "$value": "{color.base.vermilion}",
+          "$description": "Link items: band and tab key only. 4.26 dark, 3.70 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-code": {
+          "$type": "color",
+          "$value": "{color.base.plate-violet-lift}",
+          "$description": "Code items: band and tab key only. Dark lifted to 3.29:1 on ground. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-locked": {
+          "$type": "color",
+          "$value": "{color.base.locked-grey}",
+          "$description": "Locked and untyped items: band and tab key only. 5.02 dark, 3.14 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "spectrum-red": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-red}",
+          "$description": "Colour-tab key: conic-gradient stops red, yellow, green, blue, red. Key only; a colour item's band is the copied colour itself."
+        },
+        "spectrum-yellow": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-yellow}",
+          "$description": "Colour-tab key gradient stop."
+        },
+        "spectrum-green": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-green}",
+          "$description": "Colour-tab key gradient stop."
+        },
+        "spectrum-blue": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-blue}",
+          "$description": "Colour-tab key gradient stop."
+        },
+        "settings-bg": {
+          "$type": "color",
+          "$value": "{color.base.neutral-0}",
+          "$description": "Settings window background and rail."
+        },
+        "settings-surface": {
+          "$type": "color",
+          "$value": "{color.base.neutral-1}",
+          "$description": "Settings dialog and menu surface (both now ringed by `frame`, no shadow)."
+        },
+        "settings-text": {
+          "$type": "color",
+          "$value": "{color.base.neutral-14}",
+          "$description": "Settings text on `settings-bg`, `settings-surface`, `settings-muted`."
+        },
+        "settings-text-muted": {
+          "$type": "color",
+          "$value": "{color.base.neutral-9}",
+          "$description": "Hints, section captions, status on `settings-bg` (7.66 dark, 5.33 light) and `settings-muted` (5.86 / 4.89)."
+        },
+        "settings-muted": {
+          "$type": "color",
+          "$value": "{color.base.neutral-2}",
+          "$description": "Selected rail item, segmented track, hover fill, switch track when on, PaletteCard hover. Old `muted`, `accent`, `secondary` merged."
+        },
+        "settings-border": {
+          "$type": "color",
+          "$value": "{color.base.neutral-2}",
+          "$description": "Row dividers only (decorative; rows are also set apart by spacing). Never the edge of a control."
+        },
+        "settings-field": {
+          "$type": "color",
+          "$value": "{color.base.neutral-6}",
+          "$description": "Edge of inputs, ShortcutField, switch track when off, PaletteCard. ≥3:1: 3.45 dark, 3.36 light (was 1.26-1.59)."
+        },
+        "settings-segment-text": {
+          "$type": "color",
+          "$value": "{color.base.neutral-10}",
+          "$description": "Unselected segment text on `settings-muted`."
+        },
+        "settings-segment-hover": {
+          "$type": "color",
+          "$value": "{color.base.neutral-3}",
+          "$description": "Unselected segment hover."
+        },
+        "settings-segment-thumb": {
+          "$type": "color",
+          "$value": "{color.base.neutral-4}",
+          "$description": "Selected segment thumb."
+        },
+        "settings-segment-thumb-edge": {
+          "$type": "color",
+          "$value": "#FFFFFF0D",
+          "$description": "Selected thumb 1px edge (decorative; the 500 weight carries the state)."
+        },
+        "settings-danger": {
+          "$type": "color",
+          "$value": "{color.base.red-dark}",
+          "$description": "Destructive buttons, refusal lines, conflict errors (always with an icon and words). Low-chroma by design so it does not glare. 7.03 dark, 5.62 light on settings-bg; settings-on-danger on it 6.37 dark, 5.38 light."
+        },
+        "settings-on-danger": {
+          "$type": "color",
+          "$value": "{color.base.neutral-1}",
+          "$description": "Text on a filled `settings-danger` button."
+        },
+        "settings-overlay": {
+          "$type": "color",
+          "$value": "#000000B3",
+          "$description": "Settings dialog backdrop."
+        }
+      },
+      "light": {
+        "ground": {
+          "$type": "color",
+          "$value": "{color.base.stock-50}",
+          "$description": "Panel ground; also menus, dialogs, image preview, collapsed bar. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "card": {
+          "$type": "color",
+          "$value": "{color.base.white}",
+          "$description": "Item body (Chip, ListCard, CompactRow, ShelfCard). Equals ground in dark, where the card is drawn by `hairline`. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "strip": {
+          "$type": "color",
+          "$value": "{color.base.stock-100}",
+          "$description": "Chip label strip AND every hover fill (old `hover` folded in). Derived."
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{color.base.graphite-950}",
+          "$description": "Active block: active tab, keep-open on, primary button, selected search text. Light inverts to graphite. Derived."
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "#F6F5F2B8",
+          "$description": "Dialog backdrop in both windows: ground at 72%. Derived."
+        },
+        "text": {
+          "$type": "color",
+          "$value": "{color.base.graphite-950}",
+          "$description": "Primary text on `ground`, `card`, `strip`. 14.6:1 dark, 15.8:1 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "text-muted": {
+          "$type": "color",
+          "$value": "{color.base.graphite-600}",
+          "$description": "Tabs, placeholder, hints, footer captions, second line of ListCard, times. On `ground`/`card` (8.43 dark, 6.78 light) and `strip` (7.00 / 6.10). Derived."
+        },
+        "text-control": {
+          "$type": "color",
+          "$value": "{color.base.graphite-700}",
+          "$description": "Pills, keycaps, secondary buttons, on `ground`/`card`. Derived."
+        },
+        "text-strip": {
+          "$type": "color",
+          "$value": "{color.base.graphite-800}",
+          "$description": "Chip label-strip text on `strip`. Light value absorbs the old #2A2A2E. Derived."
+        },
+        "text-strip-muted": {
+          "$type": "color",
+          "$value": "{color.base.graphite-600}",
+          "$description": "Time and icons on the label strip, on `strip` (6.25 dark, 6.10 light). Derived."
+        },
+        "text-on-active": {
+          "$type": "color",
+          "$value": "{color.base.stock-50}",
+          "$description": "Text and icons on `active` (12.34 dark). Derived."
+        },
+        "frame": {
+          "$type": "color",
+          "$value": "{color.base.stock-600}",
+          "$description": "Window edge, control outlines (search, toggle, pill, keycap, notice, buttons, inputs), menu/dialog ring, scrollbar thumb. Old `frame` + `control` merged. 3.21:1 dark, 3.51:1 light on `ground`. Derived."
+        },
+        "hairline": {
+          "$type": "color",
+          "$value": "{color.base.stock-500}",
+          "$description": "Item edge and rules (filter divider, footer rule, section rules). Old `hairline` + `rule` merged. 3.21 dark; 3.24 on light `ground`, 3.53 on white `card`. Derived."
+        },
+        "active-edge": {
+          "$type": "color",
+          "$value": "{color.semantic.light.text}",
+          "$description": "1px edge of the active block and the active pill: always `text`."
+        },
+        "swatch-edge": {
+          "$type": "color",
+          "$value": "#0000001F",
+          "$description": "1px inner edge on colour bands, swatches and image thumbnails (decorative)."
+        },
+        "selection": {
+          "$type": "color",
+          "$value": "{color.base.signal}",
+          "$description": "THE ring: 2px outline, 1px offset, on the selected item only. 11.90:1 on dark ground. Never anywhere else. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "selection-edge": {
+          "$type": "color",
+          "$value": "{color.base.graphite-950}",
+          "$description": "Selected item's 1px border. Graphite in light because yellow on stock is 1.32:1; clear in dark."
+        },
+        "focus-ring": {
+          "$type": "color",
+          "$value": "{color.semantic.light.text}",
+          "$description": "The single focus ring of both windows: 2px solid, drawn INSIDE the control (offset -2px); on filled controls it takes the fill's text colour 4px in. Reads ≥12:1 on every surface it lands on (ground, strip, settings-bg, settings-surface, settings-muted)."
+        },
+        "type-text": {
+          "$type": "color",
+          "$value": "{color.base.press-blue}",
+          "$description": "Text items: band and tab key only. Dark lifted to 3.26:1 on ground. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-image": {
+          "$type": "color",
+          "$value": "{color.base.proof-green}",
+          "$description": "Image items: band and tab key only. 4.00 dark, 3.94 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-link": {
+          "$type": "color",
+          "$value": "{color.base.vermilion}",
+          "$description": "Link items: band and tab key only. 4.26 dark, 3.70 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-code": {
+          "$type": "color",
+          "$value": "{color.base.plate-violet}",
+          "$description": "Code items: band and tab key only. Dark lifted to 3.29:1 on ground. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "type-locked": {
+          "$type": "color",
+          "$value": "{color.base.locked-grey}",
+          "$description": "Locked and untyped items: band and tab key only. 5.02 dark, 3.14 light. Customizable.",
+          "$extensions": {
+            "clipmoor": {
+              "customizable": true
+            }
+          }
+        },
+        "spectrum-red": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-red}",
+          "$description": "Colour-tab key: conic-gradient stops red, yellow, green, blue, red. Key only; a colour item's band is the copied colour itself."
+        },
+        "spectrum-yellow": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-yellow}",
+          "$description": "Colour-tab key gradient stop."
+        },
+        "spectrum-green": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-green}",
+          "$description": "Colour-tab key gradient stop."
+        },
+        "spectrum-blue": {
+          "$type": "color",
+          "$value": "{color.base.spectrum-blue}",
+          "$description": "Colour-tab key gradient stop."
+        },
+        "settings-bg": {
+          "$type": "color",
+          "$value": "{color.base.white}",
+          "$description": "Settings window background and rail."
+        },
+        "settings-surface": {
+          "$type": "color",
+          "$value": "{color.base.white}",
+          "$description": "Settings dialog and menu surface (both now ringed by `frame`, no shadow)."
+        },
+        "settings-text": {
+          "$type": "color",
+          "$value": "{color.base.neutral-0}",
+          "$description": "Settings text on `settings-bg`, `settings-surface`, `settings-muted`."
+        },
+        "settings-text-muted": {
+          "$type": "color",
+          "$value": "{color.base.neutral-7}",
+          "$description": "Hints, section captions, status on `settings-bg` (7.66 dark, 5.33 light) and `settings-muted` (5.86 / 4.89)."
+        },
+        "settings-muted": {
+          "$type": "color",
+          "$value": "{color.base.neutral-13}",
+          "$description": "Selected rail item, segmented track, hover fill, switch track when on, PaletteCard hover. Old `muted`, `accent`, `secondary` merged."
+        },
+        "settings-border": {
+          "$type": "color",
+          "$value": "{color.base.neutral-11}",
+          "$description": "Row dividers only (decorative; rows are also set apart by spacing). Never the edge of a control."
+        },
+        "settings-field": {
+          "$type": "color",
+          "$value": "{color.base.neutral-8}",
+          "$description": "Edge of inputs, ShortcutField, switch track when off, PaletteCard. ≥3:1: 3.45 dark, 3.36 light (was 1.26-1.59)."
+        },
+        "settings-segment-text": {
+          "$type": "color",
+          "$value": "{color.base.neutral-5}",
+          "$description": "Unselected segment text on `settings-muted`."
+        },
+        "settings-segment-hover": {
+          "$type": "color",
+          "$value": "{color.base.neutral-12}",
+          "$description": "Unselected segment hover."
+        },
+        "settings-segment-thumb": {
+          "$type": "color",
+          "$value": "{color.base.white}",
+          "$description": "Selected segment thumb."
+        },
+        "settings-segment-thumb-edge": {
+          "$type": "color",
+          "$value": "#00000017",
+          "$description": "Selected thumb 1px edge (decorative; the 500 weight carries the state)."
+        },
+        "settings-danger": {
+          "$type": "color",
+          "$value": "{color.base.red-light}",
+          "$description": "Destructive buttons, refusal lines, conflict errors (always with an icon and words). Low-chroma by design so it does not glare. 7.03 dark, 5.62 light on settings-bg; settings-on-danger on it 6.37 dark, 5.38 light."
+        },
+        "settings-on-danger": {
+          "$type": "color",
+          "$value": "{color.base.neutral-14}",
+          "$description": "Text on a filled `settings-danger` button."
+        },
+        "settings-overlay": {
+          "$type": "color",
+          "$value": "#00000080",
+          "$description": "Settings dialog backdrop."
+        }
+      }
+    },
+    "type-key-colour": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": "{color.base.spectrum-red}",
+          "position": 0
+        },
+        {
+          "color": "{color.base.spectrum-yellow}",
+          "position": 0.25
+        },
+        {
+          "color": "{color.base.spectrum-green}",
+          "position": 0.5
+        },
+        {
+          "color": "{color.base.spectrum-blue}",
+          "position": 0.75
+        },
+        {
+          "color": "{color.base.spectrum-red}",
+          "position": 1
+        }
+      ],
+      "$description": "Conic (DTCG has no conic type): conic-gradient(red, yellow, green, blue, red). Colour tab key only."
+    }
+  },
+  "palette": {
+    "$description": "Ready-made palettes: each is an override set of the customizable semantic roles, per mode. Derived roles follow `derive` unless a palette lists them. Grafit is the default and equals color.semantic.",
+    "grafit": {
+      "$extensions": {
+        "clipmoor": {
+          "default": true,
+          "name": {
+            "tr": "Grafit",
+            "en": "Graphite"
+          }
+        }
+      },
+      "dark": {
+        "ground": {
+          "$type": "color",
+          "$value": "#1B1B1E"
+        },
+        "card": {
+          "$type": "color",
+          "$value": "#1B1B1E"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#EDEDF0"
+        },
+        "selection": {
+          "$type": "color",
+          "$value": "#FFD23F"
+        },
+        "type-text": {
+          "$type": "color",
+          "$value": "#3F67C8"
+        },
+        "type-image": {
+          "$type": "color",
+          "$value": "#178A6B"
+        },
+        "type-link": {
+          "$type": "color",
+          "$value": "#D9531E"
+        },
+        "type-code": {
+          "$type": "color",
+          "$value": "#834FD3"
+        },
+        "type-locked": {
+          "$type": "color",
+          "$value": "#8A8A92"
+        }
+      },
+      "light": {
+        "ground": {
+          "$type": "color",
+          "$value": "#F6F5F2"
+        },
+        "card": {
+          "$type": "color",
+          "$value": "#FFFFFF"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#1B1B1E"
+        },
+        "selection": {
+          "$type": "color",
+          "$value": "#FFD23F"
+        },
+        "type-text": {
+          "$type": "color",
+          "$value": "#2F55B4"
+        },
+        "type-image": {
+          "$type": "color",
+          "$value": "#178A6B"
+        },
+        "type-link": {
+          "$type": "color",
+          "$value": "#D9531E"
+        },
+        "type-code": {
+          "$type": "color",
+          "$value": "#7A45C9"
+        },
+        "type-locked": {
+          "$type": "color",
+          "$value": "#8A8A92"
+        }
+      }
+    },
+    "gri": {
+      "$extensions": {
+        "clipmoor": {
+          "name": {
+            "tr": "Gri",
+            "en": "Grey"
+          },
+          "status": "awaiting-values",
+          "roles": [
+            "ground",
+            "card",
+            "text",
+            "selection",
+            "type-text",
+            "type-image",
+            "type-link",
+            "type-code",
+            "type-locked"
+          ]
+        }
+      },
+      "$description": "Values not yet supplied: fill dark and light with the 9 customizable roles (and any derived role the code hard-codes)."
+    },
+    "haki-gri": {
+      "$extensions": {
+        "clipmoor": {
+          "name": {
+            "tr": "Haki gri",
+            "en": "Khaki grey"
+          },
+          "status": "awaiting-values",
+          "roles": [
+            "ground",
+            "card",
+            "text",
+            "selection",
+            "type-text",
+            "type-image",
+            "type-link",
+            "type-code",
+            "type-locked"
+          ]
+        }
+      },
+      "$description": "Values not yet supplied: fill dark and light with the 9 customizable roles (and any derived role the code hard-codes)."
+    },
+    "gece": {
+      "$extensions": {
+        "clipmoor": {
+          "name": {
+            "tr": "Gece",
+            "en": "Night"
+          },
+          "status": "awaiting-values",
+          "roles": [
+            "ground",
+            "card",
+            "text",
+            "selection",
+            "type-text",
+            "type-image",
+            "type-link",
+            "type-code",
+            "type-locked"
+          ]
+        }
+      },
+      "$description": "Values not yet supplied: fill dark and light with the 9 customizable roles (and any derived role the code hard-codes)."
+    },
+    "kum": {
+      "$extensions": {
+        "clipmoor": {
+          "name": {
+            "tr": "Kum",
+            "en": "Sand"
+          },
+          "status": "awaiting-values",
+          "roles": [
+            "ground",
+            "card",
+            "text",
+            "selection",
+            "type-text",
+            "type-image",
+            "type-link",
+            "type-code",
+            "type-locked"
+          ]
+        }
+      },
+      "$description": "Values not yet supplied: fill dark and light with the 9 customizable roles (and any derived role the code hard-codes)."
+    }
+  },
+  "derive": {
+    "$description": "How derived roles are computed from the customizable roles when the user edits colours. CSS color-mix in srgb; then each role is clamped: if it misses its contrast floor against the listed ground(s), its share of `text` rises in 2% steps until it passes. Presets carry exact values and skip this.",
+    "dark": {
+      "strip": "color-mix(in srgb, text 7%, ground)",
+      "active": "color-mix(in srgb, text 11%, ground)",
+      "overlay": "color-mix(in srgb, ground 72%, transparent)",
+      "text-muted": "color-mix(in srgb, text 74%, ground) | floor 4.5 on ground, card, strip",
+      "text-control": "color-mix(in srgb, text 88%, ground) | floor 4.5 on ground, card",
+      "text-strip": "color-mix(in srgb, text 91%, ground) | floor 4.5 on strip",
+      "text-strip-muted": "color-mix(in srgb, text 70%, ground) | floor 4.5 on strip",
+      "text-on-active": "#FFFFFF | floor 4.5 on active",
+      "frame": "color-mix(in srgb, text 36%, ground) | floor 3 on ground, card",
+      "hairline": "= frame",
+      "selection-edge": "transparent if selection >= 3:1 on ground, else text",
+      "type-*": "user value | floor 3 on ground and card: lifted in OKLCH L by 0.01 steps"
+    },
+    "light": {
+      "strip": "color-mix(in srgb, text 6%, ground)",
+      "active": "= text",
+      "overlay": "color-mix(in srgb, ground 72%, transparent)",
+      "text-muted": "color-mix(in srgb, text 74%, ground) | floor 4.5 on ground, card, strip",
+      "text-control": "color-mix(in srgb, text 85%, ground) | floor 4.5 on ground, card",
+      "text-strip": "color-mix(in srgb, text 92%, strip) | floor 4.5 on strip",
+      "text-strip-muted": "= text-muted | floor 4.5 on strip",
+      "text-on-active": "= ground | floor 4.5 on active",
+      "frame": "color-mix(in srgb, text 50%, ground) | floor 3 on ground, card",
+      "hairline": "color-mix(in srgb, text 48%, ground) | floor 3 on ground, card",
+      "selection-edge": "text (yellow-like selections fail 3:1 on light grounds)",
+      "type-*": "user value | floor 3 on ground and card: darkened in OKLCH L by 0.01 steps"
+    }
+  },
+  "font": {
+    "family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": [
+          "Segoe UI Variable Text",
+          "Segoe UI Variable",
+          "Segoe UI",
+          "system-ui",
+          "sans-serif"
+        ]
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": [
+          "Cascadia Code",
+          "Cascadia Mono",
+          "Consolas",
+          "monospace"
+        ],
+        "$description": "The only mono declaration: index.css reads this token, no literal."
+      }
+    }
+  },
+  "typography": {
+    "label": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "11px",
+        "fontWeight": 400,
+        "lineHeight": "16px",
+        "letterSpacing": "0.02em"
+      },
+      "$description": "Label strip, preview size caption, Shelf Ctrl-number hint. Always tabular-nums. Was 11 on an inherited 16.5."
+    },
+    "keycap": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "11px",
+        "fontWeight": 400,
+        "lineHeight": "14px"
+      },
+      "$description": "Keycap text in footers, Shelf hints, ShortcutField chips."
+    },
+    "control": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "lineHeight": "16px"
+      },
+      "$description": "Pills, notice, footer captions (footer was 12/18, now 12/16), ListCard second line, SectionHeader."
+    },
+    "control-strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "12px",
+        "fontWeight": 600,
+        "lineHeight": "16px"
+      },
+      "$description": "Active pill, SectionHeader, ShelfCard type name."
+    },
+    "title": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "lineHeight": "18px"
+      },
+      "$description": "Type tabs, menu items, DetailPane meta."
+    },
+    "title-strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "13px",
+        "fontWeight": 600,
+        "lineHeight": "18px"
+      },
+      "$description": "Active type tab, primary and secondary buttons."
+    },
+    "body": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "lineHeight": "19px"
+      },
+      "$description": "Item content, search text (was inherited 21px), dialog input, collapsed-bar text."
+    },
+    "heading": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "14px",
+        "fontWeight": 600,
+        "lineHeight": "19px"
+      },
+      "$description": "Empty-state title, dialog title in BOTH windows, panel header title (List)."
+    },
+    "query": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "18px",
+        "fontWeight": 400,
+        "lineHeight": "24px"
+      },
+      "$description": "Palette layout search only (the one large field)."
+    },
+    "code": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "lineHeight": "19px"
+      },
+      "$description": "Code item content, colour values, DetailPane code body. Never for keycaps (keycaps are sans)."
+    },
+    "settings-hint": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "lineHeight": "16px"
+      },
+      "$description": "Row hints, status, errors under a field."
+    },
+    "settings-caption": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "12px",
+        "fontWeight": 600,
+        "lineHeight": "16px"
+      },
+      "$description": "Section captions (h2), in `settings-text-muted`."
+    },
+    "settings-body": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "lineHeight": "20px"
+      },
+      "$description": "Row labels, rail items, inputs, segments, buttons."
+    },
+    "settings-body-strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": "20px"
+      },
+      "$description": "Selected segment, selected rail item."
+    },
+    "settings-title": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.sans}",
+        "fontSize": "18px",
+        "fontWeight": 600,
+        "lineHeight": "28px"
+      },
+      "$description": "Page title (h1). Line height is now a type token, not space s7."
+    }
+  },
+  "space": {
+    "space-1": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "Keycap padding-block."
+    },
+    "space-2": {
+      "$type": "dimension",
+      "$value": "2px",
+      "$description": "Segmented track inset and gap; label-to-hint gap in Settings."
+    },
+    "space-3": {
+      "$type": "dimension",
+      "$value": "3px",
+      "$description": "Pill padding-block; list ring room (margin -3 / padding 3 so the selection ring is never clipped). Off the 4px grid by design."
+    },
+    "space-4": {
+      "$type": "dimension",
+      "$value": "4px",
+      "$description": "Tab padding-block, gap between tabs, menu padding-block and item inline margin, empty title-to-hint."
+    },
+    "space-5": {
+      "$type": "dimension",
+      "$value": "5px",
+      "$description": "Keycap padding-inline, pill icon-to-name, keycap-to-caption, menu item padding-block. Off-grid by design."
+    },
+    "space-6": {
+      "$type": "dimension",
+      "$value": "6px",
+      "$description": "Chip content top, tab key-to-label, gap between pills, strip icon cluster, footer row gap, preview padding, ListCard padding-block."
+    },
+    "space-8": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "Gap between items, search-to-toggle, dialog actions, notice padding-block, Settings inline controls, CompactRow padding-block."
+    },
+    "space-9": {
+      "$type": "dimension",
+      "$value": "9px",
+      "$description": "Tab and pill padding-inline. Off-grid by design."
+    },
+    "space-10": {
+      "$type": "dimension",
+      "$value": "10px",
+      "$description": "Tabs-over-pills gap, thumbnail-to-value, footer padding-top, menu item padding-inline, field padding-inline, Settings stacked-row gap."
+    },
+    "space-12": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$description": "Content inset (items, strip, notice), section gap, rule-below, panel bottom inset, dialog gap, Settings row padding-block, button padding-inline."
+    },
+    "space-14": {
+      "$type": "dimension",
+      "$value": "14px",
+      "$description": "Panel inset (sides and top), dialog padding (both windows), footer column gap, preview window margin, ghost margin. Off-grid by design."
+    },
+    "space-16": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$description": "Palette pane padding, Settings rail padding, DetailPane padding."
+    },
+    "space-24": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Settings label-block-to-control gap; empty-state bottom padding."
+    },
+    "space-28": {
+      "$type": "dimension",
+      "$value": "28px",
+      "$description": "Settings page padding-block and section gap; panel dialog side gap."
+    },
+    "space-32": {
+      "$type": "dimension",
+      "$value": "32px",
+      "$description": "Settings page padding-inline."
+    }
+  },
+  "radius": {
+    "radius-dot": {
+      "$type": "dimension",
+      "$value": "2px",
+      "$description": "Tab key (8px colour square)."
+    },
+    "radius-key": {
+      "$type": "dimension",
+      "$value": "5px",
+      "$description": "Keycaps, thumbnails, swatches, preview image, count badge."
+    },
+    "radius-item": {
+      "$type": "dimension",
+      "$value": "6px",
+      "$description": "Menu items, segments, rail items, color-editor swatches (both windows)."
+    },
+    "radius-control": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "Search, toggle, tabs, pills, buttons, inputs, ShortcutField, notice, segmented track, empty ghost (both windows)."
+    },
+    "radius-card": {
+      "$type": "dimension",
+      "$value": "10px",
+      "$description": "Items of every layout, menus (both windows; Settings menu was 8), image preview, DetailPane body, PaletteCard."
+    },
+    "radius-window": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$description": "Panel window, Shelf, Palette, collapsed bar, dialogs (both windows; Settings dialog was 10)."
+    },
+    "radius-full": {
+      "$type": "dimension",
+      "$value": "9999px",
+      "$description": "Switch track and thumb only."
+    }
+  },
+  "size": {
+    "control-sm": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Small control: pills (12/16 + 3+3 + 2), Settings reset button, source chips, count badge."
+    },
+    "control-segment": {
+      "$type": "dimension",
+      "$value": "28px",
+      "$description": "Segment inside a 32px segmented track."
+    },
+    "control-icon": {
+      "$type": "dimension",
+      "$value": "28px",
+      "$description": "Ghost icon buttons beside the panel search: source filter, keep-open toggle, shortcut hints."
+    },
+    "control-md": {
+      "$type": "dimension",
+      "$value": "32px",
+      "$description": "Buttons in both windows (panel dialog button was 30), Settings inputs, ShortcutField, segmented track."
+    },
+    "control-lg": {
+      "$type": "dimension",
+      "$value": "38px",
+      "$description": "Search field, dialog input (both windows)."
+    },
+    "item-h": {
+      "$type": "dimension",
+      "$value": "76px",
+      "$description": "Chip module height (body + 24px strip)."
+    },
+    "strip-h": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Chip label strip."
+    },
+    "band-w": {
+      "$type": "dimension",
+      "$value": "10px",
+      "$description": "Chip type band."
+    },
+    "band-slim-w": {
+      "$type": "dimension",
+      "$value": "4px",
+      "$description": "Type band of ListCard, CompactRow, ShelfCard, DetailPane list."
+    },
+    "compact-row-h": {
+      "$type": "dimension",
+      "$value": "36px",
+      "$description": "CompactRow height (compact density)."
+    },
+    "collapsed-bar-h": {
+      "$type": "dimension",
+      "$value": "48px",
+      "$description": "CollapsedBar window height."
+    },
+    "tab-key": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "Tab key square."
+    },
+    "thumb-h": {
+      "$type": "dimension",
+      "$value": "40px",
+      "$description": "Image thumbnail height; colour swatch side."
+    },
+    "icon-sm": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$description": "Icons inside items, strips, keycaps and pills."
+    },
+    "icon-md": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$description": "Icons in 38px controls, rail, collapsed bar (the eye included)."
+    },
+    "menu-min-w": {
+      "$type": "dimension",
+      "$value": "184px",
+      "$description": "Menu min width, both windows (madeui 160 retired)."
+    },
+    "menu-max-w": {
+      "$type": "dimension",
+      "$value": "260px",
+      "$description": "Menu max width."
+    },
+    "switch-w": {
+      "$type": "dimension",
+      "$value": "36px",
+      "$description": "Switch track width (height 20, thumb 16)."
+    },
+    "field-shortcut-min": {
+      "$type": "dimension",
+      "$value": "152px",
+      "$description": "ShortcutField min width."
+    },
+    "rail-w": {
+      "$type": "dimension",
+      "$value": "280px",
+      "$description": "SettingsRail width."
+    },
+    "panel-w": {
+      "$type": "dimension",
+      "$value": "448px",
+      "$description": "List/Compact panel window (fixed)."
+    },
+    "panel-h": {
+      "$type": "dimension",
+      "$value": "640px",
+      "$description": "List/Compact panel window (fixed)."
+    },
+    "shelf-w": {
+      "$type": "dimension",
+      "$value": "920px",
+      "$description": "Shelf window."
+    },
+    "shelf-h": {
+      "$type": "dimension",
+      "$value": "260px",
+      "$description": "Shelf window."
+    },
+    "palette-w": {
+      "$type": "dimension",
+      "$value": "680px",
+      "$description": "Palette window."
+    },
+    "palette-h": {
+      "$type": "dimension",
+      "$value": "420px",
+      "$description": "Palette window."
+    },
+    "settings-w": {
+      "$type": "dimension",
+      "$value": "900px",
+      "$description": "Settings default size (resizable)."
+    },
+    "settings-h": {
+      "$type": "dimension",
+      "$value": "640px",
+      "$description": "Settings default size."
+    },
+    "settings-content-max": {
+      "$type": "dimension",
+      "$value": "576px",
+      "$description": "Settings content column max width."
+    }
+  },
+  "border": {
+    "stroke": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "stroke-ring": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "offset-selection": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "offset-focus": {
+      "$type": "dimension",
+      "$value": "-2px"
+    },
+    "offset-focus-switch": {
+      "$type": "dimension",
+      "$value": "2px"
+    }
+  },
+  "motion": {
+    "duration": {
+      "caret-blink": {
+        "$type": "duration",
+        "$value": "1060ms",
+        "$description": "Search caret: on 0-55%, off 56-100%, hard step."
+      },
+      "preview-delay": {
+        "$type": "duration",
+        "$value": "300ms",
+        "$description": "Pointer rest before the image preview opens (Ctrl+Space opens at once)."
+      },
+      "fast": {
+        "$type": "duration",
+        "$value": "150ms",
+        "$description": "Menus, switch, segments, collapse/expand."
+      },
+      "normal": {
+        "$type": "duration",
+        "$value": "200ms",
+        "$description": "Dialogs and backdrop."
+      }
+    },
+    "easing": {
+      "out": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.23,
+          1,
+          0.32,
+          1
+        ],
+        "$description": "The only curve: menus, dialogs, switch, segments, collapse."
+      }
+    },
+    "scale": {
+      "popup-enter": {
+        "$type": "number",
+        "$value": 0.97
+      }
+    },
+    "$description": "Every animation runs only under prefers-reduced-motion: no-preference. Under reduce: no caret blink (steady caret), popups appear without fade or scale, switch and segment jump."
+  },
+  "opacity": {
+    "disabled": {
+      "$type": "number",
+      "$value": 0.5
+    },
+    "idle": {
+      "$type": "number",
+      "$value": 0.6
+    }
+  },
+  "zIndex": {
+    "popup": {
+      "$type": "number",
+      "$value": 50
+    }
+  },
+  "component": {
+    "$description": "Component tokens reference semantic roles by name; resolve per mode (color.semantic.dark.* / .light.*).",
+    "item": {
+      "radius": "{radius.radius-card}",
+      "edge": "hairline",
+      "body": "card",
+      "selected-ring": "selection",
+      "selected-ring-width": "{border.stroke-ring}",
+      "selected-ring-offset": "{border.offset-selection}",
+      "selected-edge": "selection-edge",
+      "gap": "{space.space-8}"
+    },
+    "chip": {
+      "height": "{size.item-h}",
+      "strip-height": "{size.strip-h}",
+      "band-width": "{size.band-w}",
+      "strip": "strip",
+      "strip-text": "text-strip",
+      "strip-muted": "text-strip-muted",
+      "inset": "{space.space-12}"
+    },
+    "list-card": {
+      "band-width": "{size.band-slim-w}",
+      "padding-block": "{space.space-6}",
+      "padding-inline": "{space.space-12}",
+      "line-1": "body | code",
+      "line-2": "control, text-muted"
+    },
+    "compact-row": {
+      "height": "{size.compact-row-h}",
+      "band-width": "{size.band-slim-w}",
+      "padding-inline": "{space.space-12}"
+    },
+    "shelf-card": {
+      "band-width": "{size.band-slim-w}",
+      "padding": "{space.space-12}",
+      "gap": "{space.space-10}"
+    },
+    "control": {
+      "sm": "{size.control-sm}",
+      "md": "{size.control-md}",
+      "lg": "{size.control-lg}",
+      "radius": "{radius.radius-control}",
+      "edge": "frame",
+      "text": "text-control"
+    },
+    "button-primary": {
+      "height": "{size.control-md}",
+      "fill": "active",
+      "text": "text-on-active",
+      "edge": "active-edge",
+      "type": "title-strong"
+    },
+    "button-secondary": {
+      "height": "{size.control-md}",
+      "fill": "none",
+      "text": "text-control",
+      "edge": "frame",
+      "type": "title-strong"
+    },
+    "focus": {
+      "color": "focus-ring",
+      "width": "{border.stroke-ring}",
+      "offset": "{border.offset-focus}"
+    },
+    "menu": {
+      "radius": "{radius.radius-card}",
+      "min-width": "{size.menu-min-w}",
+      "max-width": "{size.menu-max-w}",
+      "edge": "frame (0 0 0 1px ring, no shadow)",
+      "item-radius": "{radius.radius-item}"
+    },
+    "dialog": {
+      "radius": "{radius.radius-window}",
+      "padding": "{space.space-14}",
+      "gap": "{space.space-12}",
+      "input-height": "{size.control-lg}",
+      "button-height": "{size.control-md}",
+      "title": "heading",
+      "edge": "frame",
+      "backdrop": "overlay | settings-overlay"
+    },
+    "switch": {
+      "width": "{size.switch-w}",
+      "height": "20px",
+      "thumb": "16px",
+      "track-off": "settings-field",
+      "track-on": "settings-text",
+      "thumb-off": "settings-bg",
+      "thumb-on": "settings-bg",
+      "radius": "{radius.radius-full}"
+    },
+    "segmented": {
+      "track-height": "{size.control-md}",
+      "segment-height": "{size.control-segment}",
+      "inset": "{space.space-2}",
+      "track": "settings-muted",
+      "thumb": "settings-segment-thumb",
+      "radius": "{radius.radius-control}",
+      "segment-radius": "{radius.radius-item}"
+    }
+  }
+}

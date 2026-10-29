@@ -1,0 +1,44 @@
+[package]
+name = "clipmoor"
+version = "0.1.0"
+description = "Clipmoor"
+authors = ["you"]
+edition = "2024"
+
+[lib]
+name = "clipmoor_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-single-instance = "2"
+auto-launch = "0.6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+aes-gcm = "0.10"
+hkdf = "0.12"
+hmac = "0.12"
+sha2 = "0.10"
+zeroize = "1"
+rand = "0.8"
+anyhow = "1"
+rusqlite = { version = "0.41.0", features = ["bundled"] }
+image = { version = "0.25", default-features = false, features = ["png", "bmp"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-core = "0.62"
+windows-future = "0.3"
+windows = { version = "0.62", features = ["Win32_Foundation", "Win32_UI_WindowsAndMessaging", "Win32_Graphics_Gdi", "Win32_UI_Input_KeyboardAndMouse", "Win32_System_Threading", "Win32_System_LibraryLoader", "Win32_Security_Cryptography", "Win32_System_DataExchange", "Win32_System_Memory", "Win32_System_Ole", "Win32_UI_Accessibility", "Win32_UI_HiDpi", "Win32_System_Com", "Win32_System_Variant", "Win32_System_RemoteDesktop", "Win32_System_Power", "Win32_System_Registry", "Win32_UI_Shell", "Win32_Globalization", "Foundation", "Security_Credentials", "Storage_Streams"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
+
+[dev-dependencies]
+tempfile = "3"
