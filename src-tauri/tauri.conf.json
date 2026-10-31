@@ -13,6 +13,7 @@
     "windows": [
       {
         "label": "panel",
+        "create": false,
         "title": "Clipmoor",
         "url": "index.html",
         "width": 448,
@@ -29,6 +30,7 @@
       },
       {
         "label": "preview",
+        "create": false,
         "title": "Clipmoor",
         "url": "index.html",
         "width": 480,

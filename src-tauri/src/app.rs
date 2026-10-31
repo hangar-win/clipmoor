@@ -329,9 +329,6 @@ pub fn init(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     hook::hold_open(Hold::KeepOpen, core.settings.keep_panel_open);
     PANEL_LOCKED.store(core.needs_panel_unlock(), Ordering::Relaxed);
     app.manage(Mutex::new(core));
-    if settings_reset {
-        tray::open_settings(app.handle());
-    }
     let (tx, rx) = mpsc::channel();
     let handle = app.handle().clone();
     clipboard::start_listener(tx, move || relock_on_session_event(&handle));

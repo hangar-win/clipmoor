@@ -87,7 +87,7 @@ fn on_menu(app: &AppHandle, e: MenuEvent) {
         "open" => hook::open_at_mouse(),
         "settings" => open_settings(app),
         "pause" => {
-            let state = app.state::<Mutex<Core>>();
+            let Some(state) = app.try_state::<Mutex<Core>>() else { return };
             let mut core = lock(&state);
             core.paused = !core.paused;
             let _ = app.state::<Tray>().pause.set_checked(core.paused);
@@ -148,6 +148,9 @@ pub fn set_busy(app: &AppHandle, busy: bool) {
 }
 
 pub fn open_settings(app: &AppHandle) {
+    if app.try_state::<hook::HookHandle>().is_none() {
+        return;
+    }
     if let Some(w) = app.get_webview_window("settings") {
         let _ = w.unminimize();
         let _ = w.show();

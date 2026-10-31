@@ -58,6 +58,12 @@ impl PanelCtl {
 }
 
 fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+    app::init(app)?;
+    update::init(app.handle());
+    for label in ["preview", "panel"] {
+        let config = app.config().app.windows.iter().find(|w| w.label == label).ok_or("window config missing")?;
+        tauri::WebviewWindowBuilder::from_config(app.handle(), config)?.build()?;
+    }
     let panel = app.get_webview_window("panel").ok_or("panel window missing")?;
     let hwnd = panel.hwnd()?.0 as isize;
     win::panel_window::make_noactivate(HWND(hwnd as _))?;
@@ -67,16 +73,17 @@ fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let preview = preview_window.hwnd()?.0 as isize;
     win::panel_window::make_noactivate(HWND(preview as _))?;
     app.manage(PanelCtl { hwnd, target: AtomicIsize::new(0), opened_at: Mutex::new(None), preview, preview_id: Mutex::new(None) });
-    app::init(app)?;
-    update::init(app.handle());
-    let (takeover, position, shortcuts) = {
+    let (takeover, position, shortcuts, settings_reset) = {
         let core = app.state::<Mutex<app::Core>>();
         let core = app::lock(&core);
-        (core.settings.takeover, core.settings.panel_position, core.settings.shortcuts)
+        (core.settings.takeover, core.settings.panel_position, core.settings.shortcuts, core.settings_reset)
     };
     let hook = win::hook::spawn(app.handle().clone(), takeover, shortcuts);
     hook.set_position(position);
     app.manage(hook);
+    if settings_reset {
+        win::tray::open_settings(app.handle());
+    }
     Ok(())
 }
 
