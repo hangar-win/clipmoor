@@ -42,3 +42,9 @@ export const oneLine = (preview: string | null) => (preview ?? '').replace(/\s+/
 export const kindName = (item: ItemView) => t(item.kind ?? 'locked')
 
 export const itemMeta = (item: ItemView, now: number, withSource = false) => [kindName(item), chipLabel(item, now).time, withSource && item.source ? sourceName(item.source) : ''].filter(Boolean).join(' · ')
+
+export function urlParts(url: string): [string, string, string] {
+  const host = URL.canParse(url) ? new URL(url).host : ''
+  const i = host ? url.indexOf(host) : -1
+  return i < 0 ? [url, '', ''] : [url.slice(0, i), host, url.slice(i + host.length)]
+}

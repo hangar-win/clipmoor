@@ -1,6 +1,6 @@
-import { ImagePreview } from '@/components/preview/image-preview'
-import { useImagePreview } from '@/components/preview/use-image-preview'
+import { ItemPreview } from '@/components/preview/item-preview'
+import { useItemPreview } from '@/components/preview/use-item-preview'
 
 export default function PreviewPage() {
-  return <ImagePreview preview={useImagePreview()} />
+  return <ItemPreview preview={useItemPreview()} />
 }

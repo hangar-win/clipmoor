@@ -5,7 +5,7 @@ import { icon } from '@/lib/stylex-utils'
 import { border, fontSize, fontWeight, letterSpacing, lineHeight, size, space } from '@/lib/constants.stylex'
 import { chipLabel, codeLines, kindName } from '@/utils/label'
 import { ink, radius } from '@/tokens.stylex'
-import { Flags, ItemShell, QuickHint, colorFill, itemStyles, type CardProps } from '../../item-parts'
+import { Flags, ItemShell, QuickHint, colorFill, itemStyles, previewHover, type CardProps } from '../../item-parts'
 
 const s = stylex.create({
   card: { height: size.shelfCardH },
@@ -21,19 +21,20 @@ const s = stylex.create({
 })
 
 function Content({ item, thumb, onPreview }: Pick<CardProps, 'item' | 'thumb' | 'onPreview'>) {
+  const hover = previewHover(onPreview)
   switch (item.kind) {
     case null: return <div {...stylex.props(s.content, s.locked)}><Lock aria-hidden {...stylex.props(icon.sm)} />{t('lockedItem')}</div>
     case 'image':
-      return <div {...stylex.props(s.content)}>{thumb ? <img src={thumb} alt="" draggable={false} onPointerMove={(e) => (e.movementX || e.movementY) && onPreview(e.currentTarget)} onPointerLeave={() => onPreview(null)} {...stylex.props(s.block)} /> : <div {...stylex.props(s.block)} />}</div>
+      return <div {...stylex.props(s.content)}>{thumb ? <img src={thumb} alt="" draggable={false} {...hover} {...stylex.props(s.block)} /> : <div {...stylex.props(s.block)} />}</div>
     case 'color':
       return (
-        <div {...stylex.props(s.content, s.media)}>
+        <div {...hover} {...stylex.props(s.content, s.media)}>
           <div {...stylex.props(s.block, colorFill(item))} />
           <span {...stylex.props(itemStyles.line, itemStyles.code)}>{item.preview?.trim()}</span>
         </div>
       )
-    case 'code': return <div {...stylex.props(s.content, itemStyles.code)}>{codeLines(item.preview ?? '', 4).map((l, i) => <span key={i} {...stylex.props(itemStyles.line, itemStyles.code)}>{l}</span>)}</div>
-    default: return <div {...stylex.props(s.content, s.clamp)}>{item.preview}</div>
+    case 'code': return <div {...hover} {...stylex.props(s.content, itemStyles.code)}>{codeLines(item.preview ?? '', 4).map((l, i) => <span key={i} {...stylex.props(itemStyles.line, itemStyles.code)}>{l}</span>)}</div>
+    default: return <div {...hover} {...stylex.props(s.content, s.clamp)}>{item.preview}</div>
   }
 }
 

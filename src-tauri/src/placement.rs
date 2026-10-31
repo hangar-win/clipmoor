@@ -49,12 +49,13 @@ pub fn clamp((x, y): (i32, i32), (w, h): (i32, i32), work: Rect) -> (i32, i32) {
     (x.min(work.right - w).max(work.left), y.min(work.bottom - h).max(work.top))
 }
 
-pub fn centered((w, h): (i32, i32), min: i32, margin: i32, work: Rect) -> Rect {
-    let (room_w, room_h) = (work.right - work.left - 2 * margin, work.bottom - work.top - 2 * margin);
+pub fn centered((w, h): (i32, i32), min: i32, margin: i32, over: Rect, work: Rect) -> Rect {
+    let room = Rect { left: work.left + margin, top: work.top + margin, right: work.right - margin, bottom: work.bottom - margin };
+    let (room_w, room_h) = (room.right - room.left, room.bottom - room.top);
     let s = (room_w as f64 / w.max(1) as f64).min(room_h as f64 / h.max(1) as f64).min(1.0);
     let w = ((w as f64 * s).round() as i32).max(min).min(room_w);
     let h = ((h as f64 * s).round() as i32).max(min).min(room_h);
-    let (x, y) = center((w, h), work, work);
+    let (x, y) = center((w, h), over, room);
     Rect { left: x, top: y, right: x + w, bottom: y + h }
 }
 
@@ -128,23 +129,30 @@ mod tests {
 
     #[test]
     fn preview_sits_in_the_middle_of_the_work_area() {
-        assert_eq!(centered((900, 700), 640, 40, WORK), r(510, 170, 900, 700));
+        assert_eq!(centered((900, 700), 640, 40, WORK, WORK), r(510, 170, 900, 700));
     }
 
     #[test]
     fn big_preview_shrinks_to_the_work_area_keeping_aspect() {
-        assert_eq!(centered((3000, 2000), 640, 40, WORK), r(240, 40, 1440, 960));
+        assert_eq!(centered((3000, 2000), 640, 40, WORK, WORK), r(240, 40, 1440, 960));
     }
 
     #[test]
     fn small_preview_keeps_the_minimum() {
-        assert_eq!(centered((200, 100), 640, 40, WORK), r(640, 200, 640, 640));
+        assert_eq!(centered((200, 100), 640, 40, WORK, WORK), r(640, 200, 640, 640));
     }
 
     #[test]
     fn preview_centred_on_a_negative_x_monitor() {
         let left = Rect { left: -1920, top: -200, right: 0, bottom: 880 };
-        assert_eq!(centered((800, 600), 640, 40, left), r(-1360, 20, 800, 640));
+        assert_eq!(centered((800, 600), 640, 40, left, left), r(-1360, 20, 800, 640));
+    }
+
+    #[test]
+    fn preview_centres_over_the_panel_and_stays_inside_the_margin() {
+        let panel = |left: i32| Rect { left, top: 200, right: left + 448, bottom: 840 };
+        assert_eq!(centered((640, 480), 0, 40, panel(600), WORK), r(504, 280, 640, 480));
+        assert_eq!(centered((640, 480), 0, 40, panel(20), WORK), r(40, 280, 640, 480));
     }
 
     #[test]

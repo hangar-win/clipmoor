@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, test } from 'vitest'
 import { setLang } from '@/lib/locale'
 import type { ItemView } from '@/types/services/items'
-import { chipLabel, codeLines } from './label'
+import { chipLabel, codeLines, urlParts } from './label'
 
 const NOW = 1_800_000_000
 const item = (p: Partial<ItemView>): ItemView => ({ id: 1, kind: 'text', source: 'notepad.exe', size: 84, preview: 'x', lastUsed: NOW, pinned: false, locked: false, lockedBy: null, group: null, hasImage: false, ...p })
@@ -48,4 +48,11 @@ describe('source names', () => {
     expect(chipLabel(item({ source: 'Code.exe' }), NOW).source).toBe('VS Code')
     expect(chipLabel(item({ source: 'msedge.exe' }), NOW).source).toBe('Edge')
   })
+})
+
+test('urlParts isolates the host so the preview can emphasise it', () => {
+  expect(urlParts('https://github.com/a/b?q=1')).toEqual(['https://', 'github.com', '/a/b?q=1'])
+  expect(urlParts('http://localhost:5173/x')).toEqual(['http://', 'localhost:5173', '/x'])
+  expect(urlParts('https://GitHub.com/a')).toEqual(['https://GitHub.com/a', '', ''])
+  expect(urlParts('not a url')).toEqual(['not a url', '', ''])
 })

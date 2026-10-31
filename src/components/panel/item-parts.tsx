@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { PointerEvent, ReactNode } from 'react'
 import * as stylex from '@stylexjs/stylex'
 import { Lock, Pin } from 'lucide-react'
 import { t } from '@/lib/locale'
@@ -61,19 +61,25 @@ export function QuickHint({ text }: { text?: string }) {
 
 type TextProps = { item: ItemView; thumb?: string; onPreview?: (el: HTMLElement | null) => void }
 
+export const previewHover = (onPreview?: (el: HTMLElement | null) => void) => ({
+  onPointerMove: (e: PointerEvent<HTMLElement>) => (e.movementX || e.movementY) && onPreview?.(e.currentTarget),
+  onPointerLeave: () => onPreview?.(null),
+})
+
 export function ItemText({ item, thumb, onPreview }: TextProps) {
+  const hover = previewHover(onPreview)
   switch (item.kind) {
     case null: return <span {...stylex.props(s.line)}>{t('lockedItem')}</span>
     case 'image':
       return (
         <span {...stylex.props(s.line)}>
-          {thumb && <img src={thumb} alt="" draggable={false} onPointerMove={(e) => (e.movementX || e.movementY) && onPreview?.(e.currentTarget)} onPointerLeave={() => onPreview?.(null)} {...stylex.props(s.thumb)} />}
+          {thumb && <img src={thumb} alt="" draggable={false} {...hover} {...stylex.props(s.thumb)} />}
           {item.size === null ? t('image') : bytes(item.size)}
         </span>
       )
-    case 'color': return <span {...stylex.props(s.line, s.code)}><i {...stylex.props(s.swatch, colorFill(item))} />{item.preview?.trim()}</span>
-    case 'code': return <span {...stylex.props(s.line, s.code)}>{codeLines(item.preview ?? '', 1)[0]}</span>
-    default: return <span {...stylex.props(s.line)}>{oneLine(item.preview)}</span>
+    case 'color': return <span {...hover} {...stylex.props(s.line, s.code)}><i {...stylex.props(s.swatch, colorFill(item))} />{item.preview?.trim()}</span>
+    case 'code': return <span {...hover} {...stylex.props(s.line, s.code)}>{codeLines(item.preview ?? '', 1)[0]}</span>
+    default: return <span {...hover} {...stylex.props(s.line)}>{oneLine(item.preview)}</span>
   }
 }
 

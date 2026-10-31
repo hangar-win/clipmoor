@@ -17,10 +17,10 @@ export const VERTICAL_NAV: NavMap = { up: 'prev', down: 'next', left: 'prevKind'
 export const emptyText = (q: Query) =>
   q.text ? (['noMatchTitle', 'noMatchHint'] as const) : q.group.type === 'group' ? (['noGroupTitle', 'noGroupHint'] as const) : q.group.type === 'pinned' ? (['noPinsTitle', 'noPinsHint'] as const) : q.kind ? (['noMatchTitle', 'noKindHint'] as const) : q.source ? (['noMatchTitle', 'noSourceHint'] as const) : (['emptyTitle', 'emptyHint'] as const)
 
-const isImage = (item?: ItemView) => item?.kind === 'image' && item.hasImage
+const previewable = (item?: ItemView) => (item?.kind === 'image' ? item.hasImage : !!item?.kind)
 const select = (s: PanelState, i: number): PanelState => {
   const selected = Math.max(0, Math.min(i, s.items.length - 1))
-  return { ...s, selected, preview: !!s.preview && isImage(s.items[selected]) }
+  return { ...s, selected, preview: !!s.preview && previewable(s.items[selected]) }
 }
 export const withItems = (s: PanelState, fetched: ItemView[], follow = true): PanelState => {
   const items = pinsFirst(fetched)
@@ -119,7 +119,7 @@ export function reduce(s: PanelState, k: PanelKey, ctx: KeyContext = { nav: VERT
       return setText(s, s.textSelected ? '' : s.query.text.replace(/\S*\s*$/u, ''))
     case 'togglePreview': {
       const item = s.items[s.selected]
-      return { state: s.preview || isImage(item) ? { ...s, preview: !s.preview } : s }
+      return { state: s.preview || previewable(item) ? { ...s, preview: !s.preview } : s }
     }
     case 'tab': return cycleKind(s, k.back)
   }

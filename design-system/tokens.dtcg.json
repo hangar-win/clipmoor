@@ -415,6 +415,36 @@
           "$value": "{color.base.spectrum-blue}",
           "$description": "Colour-tab key gradient stop."
         },
+        "syntax-keyword": {
+          "$type": "color",
+          "$value": "#C79BF2",
+          "$description": "Code preview: keywords, tags, decorators. 7.69 dark, 5.53 light on ground (6.03 on card)."
+        },
+        "syntax-string": {
+          "$type": "color",
+          "$value": "#9CCB8A",
+          "$description": "Code preview: strings, regex, symbols. 9.26 dark, 5.51 light on ground (6.00 on card)."
+        },
+        "syntax-comment": {
+          "$type": "color",
+          "$value": "#9A9AA2",
+          "$description": "Code preview: comments. Quieter than text-muted, still 6.15 dark, 5.07 light on ground (5.53 on card)."
+        },
+        "syntax-number": {
+          "$type": "color",
+          "$value": "#E8A06E",
+          "$description": "Code preview: numbers and literals (true, null). Amber, kept clear of the selection yellow. 7.92 dark, 5.73 light on ground (6.25 on card)."
+        },
+        "syntax-function": {
+          "$type": "color",
+          "$value": "#8DB0F0",
+          "$description": "Code preview: function and section titles, attributes and keys. 7.86 dark, 6.10 light on ground (6.65 on card)."
+        },
+        "syntax-type": {
+          "$type": "color",
+          "$value": "#6CCBC0",
+          "$description": "Code preview: types, classes, built-ins, variables. 8.95 dark, 5.36 light on ground (5.84 on card)."
+        },
         "settings-bg": {
           "$type": "color",
           "$value": "{color.base.neutral-0}",
@@ -666,6 +696,36 @@
           "$type": "color",
           "$value": "{color.base.spectrum-blue}",
           "$description": "Colour-tab key gradient stop."
+        },
+        "syntax-keyword": {
+          "$type": "color",
+          "$value": "#8A3FB8",
+          "$description": "Code preview: keywords, tags, decorators. 7.69 dark, 5.53 light on ground (6.03 on card)."
+        },
+        "syntax-string": {
+          "$type": "color",
+          "$value": "#357027",
+          "$description": "Code preview: strings, regex, symbols. 9.26 dark, 5.51 light on ground (6.00 on card)."
+        },
+        "syntax-comment": {
+          "$type": "color",
+          "$value": "#68686F",
+          "$description": "Code preview: comments. Quieter than text-muted, still 6.15 dark, 5.07 light on ground (5.53 on card)."
+        },
+        "syntax-number": {
+          "$type": "color",
+          "$value": "#9A4A12",
+          "$description": "Code preview: numbers and literals (true, null). Amber, kept clear of the selection yellow. 7.92 dark, 5.73 light on ground (6.25 on card)."
+        },
+        "syntax-function": {
+          "$type": "color",
+          "$value": "#2D5BA6",
+          "$description": "Code preview: function and section titles, attributes and keys. 7.86 dark, 6.10 light on ground (6.65 on card)."
+        },
+        "syntax-type": {
+          "$type": "color",
+          "$value": "#0E716B",
+          "$description": "Code preview: types, classes, built-ins, variables. 8.95 dark, 5.36 light on ground (5.84 on card)."
         },
         "settings-bg": {
           "$type": "color",
@@ -1401,6 +1461,21 @@
       "$value": "420px",
       "$description": "Palette window."
     },
+    "preview-text-max-w": {
+      "$type": "dimension",
+      "$value": "720px",
+      "$description": "Preview window content width cap for text, link and code; longer lines wrap (text) or are clipped (code)."
+    },
+    "preview-text-max-h": {
+      "$type": "dimension",
+      "$value": "480px",
+      "$description": "Preview window content height cap for text, link and code; taller content is clipped."
+    },
+    "preview-swatch": {
+      "$type": "dimension",
+      "$value": "160px",
+      "$description": "Colour preview swatch side."
+    },
     "settings-w": {
       "$type": "dimension",
       "$value": "900px",
@@ -1449,7 +1524,7 @@
       "preview-delay": {
         "$type": "duration",
         "$value": "300ms",
-        "$description": "Pointer rest before the image preview opens (Ctrl+Space opens at once)."
+        "$description": "Pointer rest before the preview opens (Ctrl+Space opens at once)."
       },
       "fast": {
         "$type": "duration",

@@ -85,25 +85,28 @@ describe('panelState', () => {
     expect(shown(before, true).state).toBe(before)
   })
   const img = (id: number): ItemView => ({ ...mk(id), kind: 'image', preview: '', hasImage: true })
-  const withImage = (selected = 1): PanelState => ({ ...st(), items: [mk(1), img(2), mk(3)], selected })
-  test('ctrl+space toggles the preview of a selected image only', () => {
+  const lk = (id: number): ItemView => ({ ...mk(id), kind: null, preview: null, locked: true })
+  const withImage = (selected = 1): PanelState => ({ ...st(), items: [lk(1), img(2), lk(3)], selected })
+  test('ctrl+space toggles the preview of any readable item, never a locked one', () => {
     const open = reduce(withImage(), { type: 'togglePreview' })
     expect(open).toEqual({ state: { ...withImage(), preview: true } })
     expect(reduce(open.state, { type: 'togglePreview' }).state.preview).toBe(false)
     expect(reduce(withImage(0), { type: 'togglePreview' }).state.preview).toBeFalsy()
+    expect(reduce({ ...st(), items: [mk(1)], selected: 0 }, { type: 'togglePreview' }).state.preview).toBe(true)
+    expect(reduce({ ...st(), items: [{ ...img(1), hasImage: false }], selected: 0 }, { type: 'togglePreview' }).state.preview).toBeFalsy()
   })
   test('esc closes the preview first, then the panel', () => {
     const r = reduce({ ...withImage(), preview: true }, { type: 'esc' })
     expect(r).toEqual({ state: { ...withImage(), preview: false } })
     expect(reduce(r.state, { type: 'esc' }).effect).toEqual({ type: 'hide' })
   })
-  test('the preview follows the selection across images and closes on any other item', () => {
-    const open: PanelState = { ...st(), items: [img(1), img(2), mk(3)], selected: 0, preview: true }
+  test('the preview follows the selection across kinds and closes on a locked item', () => {
+    const open: PanelState = { ...st(), items: [img(1), mk(2), lk(3)], selected: 0, preview: true }
     expect(reduce(open, { type: 'down' }).state).toMatchObject({ selected: 1, preview: true })
     expect(reduce({ ...open, selected: 1 }, { type: 'down' }).state).toMatchObject({ selected: 2, preview: false })
     expect(reduce({ ...open, selected: 2, preview: false }, { type: 'up' }).state.preview).toBe(false)
   })
-  test('moving to a non-image, filtering or reopening closes the preview', () => {
+  test('moving to a locked item, filtering or reopening closes the preview', () => {
     const open = { ...withImage(), preview: true }
     expect(reduce(open, { type: 'down' }).state.preview).toBe(false)
     expect(reduce(open, { type: 'home' }).state.preview).toBe(false)
@@ -113,8 +116,8 @@ describe('panelState', () => {
   })
   test('a refreshed list keeps the preview only while the same item stays selected', () => {
     const open = { ...withImage(), preview: true }
-    expect(withItems(open, [mk(9), mk(1), img(2), mk(3)]).preview).toBe(true)
-    expect(withItems(open, [mk(1), mk(3)]).preview).toBe(false)
+    expect(withItems(open, [mk(9), lk(1), img(2), lk(3)]).preview).toBe(true)
+    expect(withItems(open, [lk(1), lk(3)]).preview).toBe(false)
   })
   test('a new item arriving while hidden does not drag the selection to the old one', () => {
     const hidden = withItems(st(3, 0), [mk(4), mk(1), mk(2), mk(3)], false)

@@ -77,15 +77,14 @@ pub fn show_at(hwnd: HWND, x: i32, y: i32) -> windows::core::Result<()> {
     unsafe { SetWindowPos(hwnd, Some(HWND_TOPMOST), x, y, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE | SWP_SHOWWINDOW) }
 }
 
-const PREVIEW_MIN: f64 = 640.0;
 const PREVIEW_MARGIN: f64 = 40.0;
 
-pub fn show_centered(preview: HWND, panel: HWND, (w, h): (f64, f64)) {
+pub fn show_centered(preview: HWND, panel: HWND, (w, h): (f64, f64), min: f64) {
     let scale = unsafe { GetDpiForWindow(panel) }.max(96) as f64 / 96.0;
     let px = |v: f64| (v * scale).round() as i32;
     let p = rect(panel);
     let panel = Rect { left: p.left, top: p.top, right: p.right, bottom: p.bottom };
-    let r = placement::centered((px(w), px(h)), px(PREVIEW_MIN), px(PREVIEW_MARGIN), caret::work_area(panel));
+    let r = placement::centered((px(w), px(h)), px(min), px(PREVIEW_MARGIN), panel, caret::work_area(panel));
     let want = RECT { left: r.left, top: r.top, right: r.right, bottom: r.bottom };
     for _ in 0..2 {
         unsafe {

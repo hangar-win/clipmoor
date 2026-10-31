@@ -45,6 +45,7 @@ Two themes, **Dark** (primary) and **Light**. Each role is one token with a valu
 - **Lines.** Use `frame` for the window edge and every control outline. Use `hairline` for item edges and rules. Use `swatch-edge` for the inner edge of colour bands, swatches and thumbnails.
 - **Signal.** `selection` is the ring. `selection-edge` is the selected item's border. `focus-ring` is the keyboard focus ring in both windows.
 - **Type hues.** `type-text` Press Blue, `type-image` Proof Green, `type-link` Vermilion, `type-code` Plate Violet, `type-locked` Locked Grey. The Colour tab key is a conic gradient of `spectrum-red → spectrum-yellow → spectrum-green → spectrum-blue → spectrum-red`. A colour item's band is the copied colour itself, edged by `swatch-edge`. In dark, Press Blue and Plate Violet are lifted to `#3F67C8` (3.26:1) and `#834FD3` (3.29:1). They were 2.52 and 2.88, and the band is the item's only type cue.
+- **Syntax.** The preview window colours a code item by language: `syntax-keyword` violet, `syntax-string` green, `syntax-comment` grey, `syntax-number` amber, `syntax-function` blue, `syntax-type` teal. This is the one place text takes a hue, and only in the code preview, never in the panel. Each reaches at least 5:1 on `ground` in both themes (usage notes give the pairs). No syntax colour is yellow, so the selection ring stays unique. Punctuation and operators stay `text`.
 - **Settings.** The Settings window keeps its own neutral set: `settings-bg`, `settings-surface`, `settings-text`, `settings-text-muted`, `settings-muted`, `settings-border`, `settings-field`, the `settings-segment-*` roles, `settings-danger`, `settings-on-danger` and `settings-overlay`. Shared components (Button, Menu, Dialog, Notice) read the panel roles. Inside `.cw-settings` they are re-pointed at the settings set, so one component serves both windows. `settings-field` is the edge of every Settings control: 3.45:1 dark, 3.36:1 light (it was 1.26–1.59). `settings-border` is for row dividers only.
 
 Merged and renamed (code migration):
@@ -102,7 +103,7 @@ There is one radius scale for both windows: `radius-dot` 2 (tab key), `radius-ke
 | Menu enter/exit (opacity + scale 0.97) | 150ms | ease-out `cubic-bezier(0.23, 1, 0.32, 1)` |
 | Dialog and backdrop (opacity + scale 0.97) | 200ms | ease-out |
 | Switch thumb, segment thumb, collapse/expand | 150ms | ease-out |
-| Image preview delay (Ctrl+Space opens at once) | 300ms rest | — |
+| Preview delay (Ctrl+Space opens at once) | 300ms rest | — |
 
 There is one curve, ease-out. Switches and segments no longer fall back to the browser's `ease`. Under `prefers-reduced-motion: reduce` nothing moves or fades: the caret is steady and popups appear in place. Nothing else animates. Hover and active states change instantly.
 
@@ -124,7 +125,7 @@ The panel has four arrangements, chosen under Görünüm › Düzen, plus a coll
 4. **Palette** (680×420). A large `query` search with the active type filter as a pill. On the left, a ListCard list. On the right, a DetailPane (meta, full content, Yapıştır / Düz yapıştır). The footer has hints, with Esc on the right. → `PaletteLayout`
 5. **Collapsed bar**. With the panel kept open, Esc collapses it to one 48px row: the last item, the total count and an expand button. → `CollapsedBar`
 
-Also, the image preview opens on a 300ms hover or on Ctrl+Space, at no more than 60% of the window height and 2× natural size. The panel drags from the header's empty area only. The window has 12px corners, no border chrome and no snap.
+Also, the preview opens on a 300ms hover over an item's content or on Ctrl+Space. An image shows at no more than 60% of the window height and 2× natural size. Text, links and code size the window to their content up to `preview-text-max-w` × `preview-text-max-h`, then text wraps and the rest is clipped (the preview takes no pointer input, so it cannot scroll). A colour shows a `preview-swatch` square with its value. A locked item never opens the preview. The panel drags from the header's empty area only. The window has 12px corners, no border chrome and no snap.
 
 Settings is about 900×640 and resizable, with a Windows 11 style left `SettingsRail`. The sections are Genel, Kısayollar, Görünüm, Geçmiş and Güvenlik. → `SettingsLayout`
 

@@ -133,21 +133,22 @@ pub fn set_locked(app: AppHandle, target: LockTarget, locked: bool) -> Result<()
 
 #[tauri::command]
 pub fn preview_item(app: AppHandle, id: Option<i64>) {
+    let item = id.and_then(|id| core(&app).items.iter().find(|i| i.id == id && i.meta.is_some()).map(ItemView::from));
     let ctl = app.state::<crate::PanelCtl>();
     let mut want = ctl.preview_id.lock().unwrap_or_else(|e| e.into_inner());
-    *want = id;
-    if id.is_none() {
+    *want = item.as_ref().map(|i| i.id);
+    if want.is_none() {
         panel_window::hide(ctl.preview());
     }
-    let _ = app.emit_to("preview", event::PREVIEW_ITEM, id);
+    let _ = app.emit_to("preview", event::PREVIEW_ITEM, item);
 }
 
 #[tauri::command]
-pub fn place_preview(app: AppHandle, id: i64, width: f64, height: f64) {
+pub fn place_preview(app: AppHandle, id: i64, width: f64, height: f64, min: f64) {
     let ctl = app.state::<crate::PanelCtl>();
     let want = ctl.preview_id.lock().unwrap_or_else(|e| e.into_inner());
     if *want == Some(id) && panel_window::is_visible(ctl.panel()) {
-        panel_window::show_centered(ctl.preview(), ctl.panel(), (width, height));
+        panel_window::show_centered(ctl.preview(), ctl.panel(), (width, height), min);
     }
 }
 

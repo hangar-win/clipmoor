@@ -15,6 +15,7 @@
     "@base-ui/react": "1.9.0",
     "@stylexjs/stylex": "0.19.1",
     "@tauri-apps/api": "2.12.4",
+    "highlight.js": "11.11.1",
     "lucide-react": "1.63.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"

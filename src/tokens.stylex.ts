@@ -40,6 +40,15 @@ export const hue = stylex.defineVars({
   color: 'conic-gradient(#E74C3C, #F1C40F, #2ECC71, #3498DB, #E74C3C)',
 })
 
+export const syntax = stylex.defineVars({
+  keyword: 'light-dark(#8A3FB8, #C79BF2)',
+  string: 'light-dark(#357027, #9CCB8A)',
+  comment: 'light-dark(#68686F, #9A9AA2)',
+  number: 'light-dark(#9A4A12, #E8A06E)',
+  function: 'light-dark(#2D5BA6, #8DB0F0)',
+  type: 'light-dark(#0E716B, #6CCBC0)',
+})
+
 export const font = stylex.defineConsts({
   sans: '"Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif',
   mono: '"Cascadia Code", "Cascadia Mono", Consolas, monospace',
