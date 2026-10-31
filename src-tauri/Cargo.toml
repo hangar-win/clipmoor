@@ -27,6 +27,7 @@ rand = "0.8"
 anyhow = "1"
 rusqlite = { version = "0.41.0", features = ["bundled"] }
 image = { version = "0.25", default-features = false, features = ["png", "bmp"] }
+tauri-plugin-updater = "2"
 
 [target.'cfg(windows)'.dependencies]
 windows-core = "0.62"

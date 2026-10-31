@@ -14,3 +14,5 @@ export type UnlockDuration = 'everyTime' | 'fiveMinutes' | 'whileRunning'
 export type PanelPosition = 'caret' | 'mouse' | 'center'
 export type Settings = { historyMaxItems: number; historyMaxDays: number; takeover: boolean; language: 'system' | LocaleType; closeOnPaste: boolean; unlockDuration: UnlockDuration; relockOnSessionChange: boolean; lockAllHistory: boolean; panelPosition: PanelPosition; theme: Theme; excludedApps: string[]; keepPanelOpen: boolean; shortcuts: Shortcuts; customColors: CustomColors; layout: string; compact: boolean }
 export type AppInfo = { keyMethod: 'tpm' | 'dpapi'; windowsHistory: boolean; autostart: boolean; lockKeyMissing: boolean; lockPending: boolean; settingsReset: boolean; unreadable: number }
+export type UpdateStatus = 'idle' | 'checking' | 'current' | 'available' | 'failed' | 'installing' | 'installFailed'
+export type UpdateInfo = { current: string; available: string | null; status: UpdateStatus }

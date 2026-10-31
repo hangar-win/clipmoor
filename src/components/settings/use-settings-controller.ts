@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { t } from '@/lib/locale'
 import { deleteAllService, deleteHistoryService, getRecentSourcesService } from '@/services/items'
-import { getAppInfoService, getSettingsService, onLockError, onSettingsChanged, openWindowsClipboardSettingsService, saveSettingsService, setAutostartService } from '@/services/settings'
-import type { AppInfo, Settings } from '@/types/services/settings'
+import { checkUpdateService, getAppInfoService, getSettingsService, getUpdateService, installUpdateService, onLockError, onSettingsChanged, onUpdateChanged, openWindowsClipboardSettingsService, saveSettingsService, setAutostartService } from '@/services/settings'
+import type { AppInfo, Settings, UpdateInfo } from '@/types/services/settings'
 import { loadSection, reasonSection, saveSection, type Section } from '@/utils/sections'
 import { useShortcutRecording } from './use-shortcut-recording'
 
@@ -13,6 +13,7 @@ const errorText = (e: unknown) => (e === 'lockCanceled' || e === 'lockKeyMissing
 export function useSettingsController() {
   const [cfg, setCfg] = useState<Settings | null>(null)
   const [info, setInfo] = useState<AppInfo | null>(null)
+  const [updates, setUpdates] = useState<UpdateInfo | null>(null)
   const [recent, setRecent] = useState<string[]>([])
   const [status, setStatus] = useState('')
   const [confirm, setConfirm] = useState(false)
@@ -27,6 +28,8 @@ export function useSettingsController() {
   useEffect(() => {
     getSettingsService().then(setCfg, console.error)
     const offSettings = onSettingsChanged(setCfg)
+    getUpdateService().then(setUpdates, console.error)
+    const offUpdate = onUpdateChanged(setUpdates)
     getRecentSourcesService().then(setRecent, console.error)
     getAppInfoService().then((i) => {
       setInfo(i)
@@ -42,6 +45,7 @@ export function useSettingsController() {
       removeEventListener('focus', refreshInfo)
       off.then((f) => f())
       offSettings.then((f) => f())
+      offUpdate.then((f) => f())
     }
   }, [])
 
@@ -59,6 +63,7 @@ export function useSettingsController() {
   return {
     cfg,
     info,
+    updates,
     status,
     confirm,
     section,
@@ -79,5 +84,7 @@ export function useSettingsController() {
       run(deleteAllService())
     },
     openWindowsSettings: () => openWindowsClipboardSettingsService().catch(console.error),
+    checkUpdate: () => checkUpdateService().then(setUpdates, console.error),
+    installUpdate: () => installUpdateService().catch(console.error),
   }
 }

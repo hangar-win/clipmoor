@@ -52,6 +52,7 @@
   "bundle": {
     "active": true,
     "targets": ["nsis"],
+    "createUpdaterArtifacts": true,
     "windows": {
       "nsis": {
         "installMode": "currentUser",
@@ -66,5 +67,14 @@
       "icons/128x128@2x.png",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNBRjNDQTZGRTc5MkRENjUKUldSbDNaTG5iOHJ6T2xvckFzc1hjQWQxSk85K2d4eDRTcW9sMzdERys3dTRZc1dLSmNxcm1SN1QK",
+      "endpoints": ["https://github.com/hangar-win/clipmoor/releases/latest/download/latest.json"],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
   }
 }

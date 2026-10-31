@@ -186,6 +186,16 @@ const en: LocalizationKeys = {
   layoutPalette: 'Palette',
   compactMode: 'Compact mode',
   compactModeHint: 'One line per item; more items in the same height.',
+  updates: 'Updates',
+  upVersion: 'Version {v}',
+  upCheck: 'Check now',
+  upInstall: 'Update',
+  upChecking: 'Checking…',
+  upCurrent: 'Up to date',
+  upAvailable: 'New version: {v}',
+  upFailed: 'Couldn’t check',
+  upInstalling: 'Downloading, then restarting…',
+  upInstallFailed: 'Couldn’t install the update',
 }
 
 export default en

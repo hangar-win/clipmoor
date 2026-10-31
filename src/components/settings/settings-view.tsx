@@ -10,7 +10,7 @@ import { t } from '@/lib/locale'
 import type { I18NKeys } from '@/locale'
 import { SECTIONS, railStep, type Section } from '@/utils/sections'
 import { check, formatChord, isDefaultShortcut, isWinV, shortcutText, type Action, type Verdict } from '@/utils/shortcuts'
-import type { Mode, Theme } from '@/types/services/settings'
+import type { Mode, Theme, UpdateInfo, UpdateStatus } from '@/types/services/settings'
 import type { SettingsController } from './use-settings-controller'
 import { ink } from '@/tokens.stylex'
 import { Choice, NumberField, Row, ShortcutRow, Toggle } from './controls'
@@ -40,6 +40,9 @@ const LABEL = Object.fromEntries(ACTIONS.map(([a, k]) => [a, k])) as Record<Acti
 const themeMode = (theme: Theme): Mode => (theme === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
 const verdictText = (v: Verdict) => (v.error === 'scConflict' ? t('scConflict').replace('{name}', t(LABEL[v.clash!])) : t((v.error ?? v.warn)!))
 
+const UPDATE_TEXT: Record<UpdateStatus, I18NKeys | null> = { idle: null, checking: 'upChecking', current: 'upCurrent', available: 'upAvailable', failed: 'upFailed', installing: 'upInstalling', installFailed: 'upInstallFailed' }
+const updateHint = (u: UpdateInfo) => [t('upVersion').replace('{v}', u.current), UPDATE_TEXT[u.status] && t(UPDATE_TEXT[u.status]!).replace('{v}', u.available ?? '')].filter(Boolean).join(' · ')
+
 const NAV: Record<Section, [I18NKeys, LucideIcon]> = {
   general: ['navGeneral', SlidersHorizontal],
   shortcuts: ['secShortcuts', Keyboard],
@@ -58,7 +61,7 @@ export function SettingsView({ settings: c }: { settings: SettingsController }) 
     document.body.classList.add(...(stylex.props(settingsInk).className?.split(' ') ?? []))
   }, [])
 
-  const { cfg, info, section, shortcuts: rec } = c
+  const { cfg, info, updates, section, shortcuts: rec } = c
   if (!cfg) return null
 
   const update = c.update
@@ -110,6 +113,15 @@ export function SettingsView({ settings: c }: { settings: SettingsController }) 
           <Toggle label={winV ? 'takeover' : 'takeoverAlso'} hint={winV ? 'takeoverHint' : 'takeoverAlsoHint'} checked={cfg.takeover} onChange={(takeover) => update({ takeover })} />
           <Toggle label="autostart" checked={info?.autostart ?? false} onChange={c.setAutostart} />
           <Choice label="language" value={cfg.language} options={[['system', 'langSystem'], ['tr', 'langTr'], ['en', 'langEn']]} onChange={(language) => update({ language })} />
+          {updates && (
+            <Row label="updates" hintText={updateHint(updates)}>
+              {updates.available && updates.status !== 'installing' ? (
+                <Button variant="primary" onClick={c.installUpdate}>{t('upInstall')}</Button>
+              ) : (
+                <Button disabled={updates.status === 'checking' || updates.status === 'installing'} onClick={c.checkUpdate}>{t('upCheck')}</Button>
+              )}
+            </Row>
+          )}
         </section>
         <section {...stylex.props(s.section)}>
           <h2 {...stylex.props(s.h2)}>{t('secPanel')}</h2>

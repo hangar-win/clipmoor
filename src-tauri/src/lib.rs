@@ -10,6 +10,7 @@ pub mod lock;
 pub mod placement;
 mod settings;
 pub mod store;
+mod update;
 #[cfg(windows)]
 mod win;
 
@@ -27,6 +28,7 @@ pub mod event {
     pub const PANEL_SHOWN: &str = "panel-shown";
     pub const PANEL_HIDDEN: &str = "panel-hidden";
     pub const PREVIEW_ITEM: &str = "preview-item";
+    pub const UPDATE_CHANGED: &str = "update-changed";
 }
 
 pub struct PanelCtl {
@@ -66,6 +68,7 @@ fn setup(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     win::panel_window::make_noactivate(HWND(preview as _))?;
     app.manage(PanelCtl { hwnd, target: AtomicIsize::new(0), opened_at: Mutex::new(None), preview, preview_id: Mutex::new(None) });
     app::init(app)?;
+    update::init(app.handle());
     let (takeover, position, shortcuts) = {
         let core = app.state::<Mutex<app::Core>>();
         let core = app::lock(&core);
@@ -83,13 +86,14 @@ pub fn run() {
     }
     let ran = tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _, _| win::tray::open_settings(app)))
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .setup(|app| {
             if let Err(e) = setup(app) {
                 win::fatal(&e.to_string());
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![commands::list_items, commands::activate, commands::item_image, commands::hide_panel, commands::panel_painted, commands::drag_panel, commands::set_panel_geometry, commands::capture_panel_keys, commands::item_text, commands::toggle_pin, commands::pin_items, commands::list_groups, commands::create_group, commands::rename_group, commands::delete_group, commands::move_to_group, commands::panel_input, commands::preview_item, commands::place_preview, commands::set_locked, commands::get_settings, commands::save_settings, commands::set_keep_open,commands::delete_item, commands::delete_history, commands::delete_all, commands::recent_sources, commands::app_info, commands::set_autostart, commands::open_settings, commands::open_windows_clipboard_settings, commands::set_recording])
+        .invoke_handler(tauri::generate_handler![commands::list_items, commands::activate, commands::item_image, commands::hide_panel, commands::panel_painted, commands::drag_panel, commands::set_panel_geometry, commands::capture_panel_keys, commands::item_text, commands::toggle_pin, commands::pin_items, commands::list_groups, commands::create_group, commands::rename_group, commands::delete_group, commands::move_to_group, commands::panel_input, commands::preview_item, commands::place_preview, commands::set_locked, commands::get_settings, commands::save_settings, commands::set_keep_open,commands::delete_item, commands::delete_history, commands::delete_all, commands::recent_sources, commands::app_info, commands::set_autostart, commands::open_settings, commands::open_windows_clipboard_settings, commands::set_recording, update::update_state, update::check_update, update::install_update])
         .run(tauri::generate_context!());
     if let Err(e) = ran {
         win::fatal(&e.to_string());

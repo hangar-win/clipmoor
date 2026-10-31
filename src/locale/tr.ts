@@ -184,6 +184,16 @@ const tr = {
   layoutPalette: 'Palet',
   compactMode: 'Kompakt mod',
   compactModeHint: 'Öğe başına tek satır; aynı yükseklikte daha çok öğe.',
+  updates: 'Güncellemeler',
+  upVersion: 'Sürüm {v}',
+  upCheck: 'Şimdi denetle',
+  upInstall: 'Güncelle',
+  upChecking: 'Denetleniyor…',
+  upCurrent: 'Güncel',
+  upAvailable: 'Yeni sürüm: {v}',
+  upFailed: 'Denetlenemedi',
+  upInstalling: 'İndiriliyor, ardından yeniden başlar…',
+  upInstallFailed: 'Güncelleme yüklenemedi',
 }
 
 export type LocalizationKeys = typeof tr
