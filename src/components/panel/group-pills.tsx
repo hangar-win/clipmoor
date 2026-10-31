@@ -4,9 +4,9 @@ import { t } from '@/lib/locale'
 import type { GroupFilter } from '@/types/services/items'
 import type { GroupView } from '@/types/services/groups'
 import { ink, radius } from '@/tokens.stylex'
-import { ListX, Lock, Pin } from 'lucide-react'
+import { Lock, Pin } from 'lucide-react'
 import { icon } from '@/lib/stylex-utils'
-import { border, fontSize, fontWeight, lineHeight, opacity, size, space } from '@/lib/constants.stylex'
+import { border, fontSize, fontWeight, lineHeight, size, space } from '@/lib/constants.stylex'
 
 export const DRAG_TYPE = 'application/x-clipmoor-item'
 
@@ -19,15 +19,14 @@ const s = stylex.create({
   on: { borderColor: ink.activeEdge, color: ink.text, fontWeight: fontWeight.controlStrong },
   target: { borderStyle: 'dashed', borderColor: ink.textControl },
   over: { borderStyle: 'solid', borderColor: ink.text, color: ink.text, backgroundColor: ink.strip },
-  clear: { marginInlineStart: 'auto', borderColor: 'transparent', color: { default: ink.textMuted, ':hover': { default: ink.text, ':disabled': ink.textMuted } }, backgroundColor: { default: 'transparent', ':hover': { default: ink.strip, ':disabled': 'transparent' } }, opacity: { default: null, ':disabled': opacity.disabled }, outline: 'none' },
 })
 
-type Props = { group: GroupFilter; groups: GroupView[]; dragging: boolean; unpinned: number; inline?: boolean; onPick: (g: GroupFilter) => void; onDropItem: (item: number, group: number) => void; onClear: () => void }
+type Props = { group: GroupFilter; groups: GroupView[]; dragging: boolean; inline?: boolean; onPick: (g: GroupFilter) => void; onDropItem: (item: number, group: number) => void }
 
 const FIXED: GroupFilter[] = [{ type: 'all' }, { type: 'pinned' }]
 const same = (a: GroupFilter, b: GroupFilter) => a.type === b.type && (a.type !== 'group' || (b.type === 'group' && a.id === b.id))
 
-export function GroupPills({ group, groups, dragging, unpinned, inline = false, onPick, onDropItem, onClear }: Props) {
+export function GroupPills({ group, groups, dragging, inline = false, onPick, onDropItem }: Props) {
   const [over, setOver] = useState<number | null>(null)
   return (
     <div role="tablist" {...stylex.props(s.row, inline && s.inline)}>
@@ -67,12 +66,6 @@ export function GroupPills({ group, groups, dragging, unpinned, inline = false, 
           </div>
         )
       })}
-      {!inline && (
-        <button type="button" disabled={!unpinned} onClick={onClear} {...stylex.props(s.pill, s.clear)}>
-          <ListX {...stylex.props(icon.sm)} />
-          {t('clearUnpinned')}
-        </button>
-      )}
     </div>
   )
 }

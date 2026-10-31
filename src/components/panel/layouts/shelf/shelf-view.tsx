@@ -29,7 +29,7 @@ export function ShelfView({ panel: c }: LayoutViewProps) {
         <SearchField text={query.text} selected={!!c.state.textSelected} style={s.search} />
         <TypeTabs kind={query.kind} onPick={c.pickKind} style={s.tabs} />
         <GroupMenu groups={c.groups} shown={c.shown} style={s.pills} onLock={c.lockGroup} onRename={(group) => c.setDialog({ type: 'rename', group })} onDelete={(group) => c.setDialog({ type: 'delete', group })}>
-          <GroupPills inline group={query.group} groups={c.groups} dragging={c.dragging} unpinned={c.unpinned} onPick={c.pickGroup} onDropItem={c.move} onClear={() => c.setDialog({ type: 'clear', count: c.unpinned })} />
+          <GroupPills inline group={query.group} groups={c.groups} dragging={c.dragging} onPick={c.pickGroup} onDropItem={c.move} />
         </GroupMenu>
         <PanelTools panel={c} />
       </div>

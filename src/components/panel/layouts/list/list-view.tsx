@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex'
-import { ChevronRight, ChevronUp } from 'lucide-react'
+import { ChevronRight, ChevronUp, ListX } from 'lucide-react'
 import { t } from '@/lib/locale'
 import { icon } from '@/lib/stylex-utils'
-import { border, fontSize, fontWeight, lineHeight, size, space } from '@/lib/constants.stylex'
+import { border, fontSize, fontWeight, lineHeight, opacity, size, space } from '@/lib/constants.stylex'
 import type { LayoutViewProps } from '@/types/panel-layout'
 import { groupItems, pinAllIds } from '@/utils/date-groups'
 import { formatChord, navHint } from '@/utils/shortcuts'
@@ -25,7 +25,11 @@ const s = stylex.create({
   body: { flexGrow: 1, minHeight: 0, display: 'flex', flexDirection: 'column', gap: space.s12, paddingInline: space.s14, paddingBottom: space.s12 },
   title: { flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: space.s8 },
   heading: { pointerEvents: 'none', fontSize: fontSize.heading, lineHeight: lineHeight.heading, fontWeight: fontWeight.heading },
-  chevron: { display: 'grid', placeItems: 'center', width: size.controlSm, height: size.controlSm, borderWidth: border.stroke, borderStyle: 'solid', borderColor: 'transparent', borderRadius: radius.control, color: ink.textMuted, cursor: 'default', backgroundColor: { default: 'transparent', ':hover': ink.strip } },
+  actions: { display: 'flex', alignItems: 'center', gap: space.s4 },
+  iconButton: {
+    display: 'grid', placeItems: 'center', width: size.controlSm, height: size.controlSm, borderWidth: border.stroke, borderStyle: 'solid', borderColor: 'transparent', borderRadius: radius.control, color: ink.textMuted, cursor: 'default',
+    backgroundColor: { default: 'transparent', ':hover': { default: ink.strip, ':disabled': 'transparent' } }, opacity: { default: null, ':disabled': opacity.disabled },
+  },
   search: { flexShrink: 0, display: 'flex', alignItems: 'center', gap: space.s8 },
   filters: { flexShrink: 0, display: 'flex', flexDirection: 'column', gap: space.s10 },
 })
@@ -45,9 +49,14 @@ export function ListView({ panel: c }: LayoutViewProps) {
       <div {...dragHandle(c)} {...stylex.props(s.head)}>
         <div {...dragArea} {...stylex.props(s.title)}>
           <h1 {...stylex.props(s.heading)}>{t('clipboard')}</h1>
-          <button type="button" tabIndex={-1} aria-expanded={filtersShown} aria-label={t('filters')} title={t('filters')} onMouseDown={(e) => e.preventDefault()} onClick={c.toggleFilters} {...stylex.props(s.chevron)}>
-            <Chevron aria-hidden {...stylex.props(icon.md)} />
-          </button>
+          <div {...stylex.props(s.actions)}>
+            <button type="button" tabIndex={-1} disabled={!c.unpinned} aria-label={t('clearUnpinned')} title={t('clearUnpinned')} onMouseDown={(e) => e.preventDefault()} onClick={() => c.setDialog({ type: 'clear', count: c.unpinned })} {...stylex.props(s.iconButton)}>
+              <ListX aria-hidden {...stylex.props(icon.md)} />
+            </button>
+            <button type="button" tabIndex={-1} aria-expanded={filtersShown} aria-label={t('filters')} title={t('filters')} onMouseDown={(e) => e.preventDefault()} onClick={c.toggleFilters} {...stylex.props(s.iconButton)}>
+              <Chevron aria-hidden {...stylex.props(icon.md)} />
+            </button>
+          </div>
         </div>
         <div {...dragArea} {...stylex.props(s.search)}>
           <SearchField text={query.text} selected={!!c.state.textSelected} />
@@ -57,7 +66,7 @@ export function ListView({ panel: c }: LayoutViewProps) {
           <div {...dragArea} {...stylex.props(s.filters)}>
             <TypeTabs kind={query.kind} onPick={c.pickKind} />
             <GroupMenu groups={c.groups} shown={c.shown} onLock={c.lockGroup} onRename={(group) => c.setDialog({ type: 'rename', group })} onDelete={(group) => c.setDialog({ type: 'delete', group })}>
-              <GroupPills group={query.group} groups={c.groups} dragging={c.dragging} unpinned={c.unpinned} onPick={c.pickGroup} onDropItem={c.move} onClear={() => c.setDialog({ type: 'clear', count: c.unpinned })} />
+              <GroupPills group={query.group} groups={c.groups} dragging={c.dragging} onPick={c.pickGroup} onDropItem={c.move} />
             </GroupMenu>
           </div>
         )}
