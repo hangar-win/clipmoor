@@ -287,7 +287,16 @@ impl HookState {
             return if self.held.remove(&ev.vk) { HookAction::Swallow } else { HookAction::Pass };
         }
         if repeat {
-            return if self.held.contains(&ev.vk) { HookAction::Swallow } else { HookAction::Pass };
+            if !self.held.contains(&ev.vk) {
+                return HookAction::Pass;
+            }
+            if self.panel_open && self.released == 0 && !self.win_down {
+                let action = self.panel_action(ev.vk);
+                if matches!(action, HookAction::Forward(PanelKey::Up | PanelKey::Down | PanelKey::Left | PanelKey::Right | PanelKey::Backspace | PanelKey::DeleteWord)) {
+                    return action;
+                }
+            }
+            return HookAction::Swallow;
         }
 
         if self.recording {
@@ -901,6 +910,25 @@ mod tests {
         assert_eq!(h.decide(d(0x41)), HookAction::Swallow);
         assert_eq!(h.decide(u(0x41)), HookAction::Swallow);
         assert_eq!(h.decide(d(0x41)), HookAction::Pass);
+    }
+
+    #[test]
+    fn held_navigation_keys_repeat_but_actions_do_not() {
+        let mut h = HookState::new(true);
+        h.set_panel_open(true);
+        for _ in 0..3 {
+            assert_eq!(h.decide(d(0x28)), HookAction::Forward(PanelKey::Down));
+        }
+        assert_eq!(h.decide(u(0x28)), HookAction::Swallow);
+        assert_eq!(h.decide(d(0x08)), HookAction::Forward(PanelKey::Backspace));
+        assert_eq!(h.decide(d(0x08)), HookAction::Forward(PanelKey::Backspace));
+        assert_eq!(h.decide(u(0x08)), HookAction::Swallow);
+        assert!(matches!(h.decide(d(0x0D)), HookAction::Forward(PanelKey::Activate { .. })));
+        assert_eq!(h.decide(d(0x0D)), HookAction::Swallow);
+        assert_eq!(h.decide(d(0x41)), HookAction::Translate);
+        assert_eq!(h.decide(d(0x41)), HookAction::Swallow);
+        h.set_panel_open(false);
+        assert_eq!(h.decide(d(0x0D)), HookAction::Swallow);
     }
 
     #[test]

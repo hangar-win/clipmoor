@@ -8,7 +8,7 @@ use windows::Win32::System::DataExchange::*;
 use windows::Win32::System::LibraryLoader::GetModuleHandleW;
 use windows::Win32::System::Memory::{GHND, GlobalAlloc, GlobalLock, GlobalSize, GlobalUnlock};
 use windows::Win32::System::Ole::{CF_DIB, CF_DIBV5, CF_UNICODETEXT};
-use windows::Win32::UI::WindowsAndMessaging::{CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, HWND_MESSAGE, MSG, RegisterClassW, WINDOW_EX_STYLE, WINDOW_STYLE, WM_CLIPBOARDUPDATE, WNDCLASSW};
+use windows::Win32::UI::WindowsAndMessaging::{CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, HWND_MESSAGE, KillTimer, MSG, RegisterClassW, SetTimer, WINDOW_EX_STYLE, WINDOW_STYLE, WM_CLIPBOARDUPDATE, WM_TIMER, WNDCLASSW};
 use windows::core::{Error, PCWSTR, Result, w};
 
 use image::ImageDecoder;
@@ -172,13 +172,13 @@ pub fn text_for_search() -> Option<String> {
     search_text(&utf16(&plain?))
 }
 
-fn read_open() -> (ClipMarkers, ClipFormats, Option<Vec<u8>>) {
+fn read_open(source_exe: &str) -> (ClipMarkers, ClipFormats, Option<Vec<u8>>) {
     let markers = ClipMarkers {
         exclude_monitor: has(w!("ExcludeClipboardContentFromMonitorProcessing")),
         viewer_ignore: has(w!("Clipboard Viewer Ignore")),
         can_include_in_history: get_named(w!("CanIncludeInClipboardHistory")).and_then(|b| Some(u32::from_le_bytes(b.get(..4)?.try_into().ok()?))),
     };
-    if markers.exclude_monitor || markers.viewer_ignore || markers.can_include_in_history == Some(0) {
+    if markers.blocks(source_exe) {
         return (markers, ClipFormats::default(), None);
     }
     let plain = get(CF_UNICODETEXT.0 as u32).map(|b| utf16(&b));
@@ -192,7 +192,7 @@ pub fn read() -> Result<RawClip> {
     let source_exe = source_app::foreground_exe();
     open()?;
     let seq = unsafe { GetClipboardSequenceNumber() };
-    let (markers, mut formats, dib) = read_open();
+    let (markers, mut formats, dib) = read_open(&source_exe);
     let _ = unsafe { CloseClipboard() };
     if let Some(dib) = dib {
         formats.png = dib_to_png(&dib);
@@ -204,8 +204,16 @@ thread_local! {
     static LISTENER: std::cell::OnceCell<Sender<RawClip>> = const { std::cell::OnceCell::new() };
 }
 
+const READ_TIMER: usize = 1;
+const READ_DELAY_MS: u32 = 150;
+
 unsafe extern "system" fn listener_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     if msg == WM_CLIPBOARDUPDATE {
+        unsafe { SetTimer(Some(hwnd), READ_TIMER, READ_DELAY_MS, None) };
+        return LRESULT(0);
+    }
+    if msg == WM_TIMER && wparam.0 == READ_TIMER {
+        let _ = unsafe { KillTimer(Some(hwnd), READ_TIMER) };
         match read() {
             Ok(raw) => LISTENER.with(|tx| {
                 if let Some(tx) = tx.get() {

@@ -28,6 +28,15 @@ pub struct ClipMarkers {
     pub can_include_in_history: Option<u32>,
 }
 
+const REMOTE_CLIENTS: [&str; 5] = ["mstsc.exe", "msrdc.exe", "vmconnect.exe", "WindowsSandboxClient.exe", "WindowsSandboxRemoteSession.exe"];
+
+impl ClipMarkers {
+    pub fn blocks(&self, source_exe: &str) -> bool {
+        let remote = REMOTE_CLIENTS.iter().any(|c| c.eq_ignore_ascii_case(source_exe));
+        self.exclude_monitor || self.viewer_ignore || (self.can_include_in_history == Some(0) && !remote)
+    }
+}
+
 #[derive(Debug)]
 pub struct RawClip {
     pub formats: ClipFormats,
@@ -59,8 +68,7 @@ pub enum CaptureDecision {
 }
 
 pub fn decide_capture(raw: RawClip, ctx: &CaptureContext) -> CaptureDecision {
-    let m = &raw.markers;
-    if m.exclude_monitor || m.viewer_ignore || m.can_include_in_history == Some(0) {
+    if raw.markers.blocks(&raw.source_exe) {
         return CaptureDecision::Skip(SkipReason::Marked);
     }
     if ctx.own_seq == Some(raw.seq) {
@@ -133,6 +141,23 @@ mod tests {
         let mut r = raw(Some("p"));
         r.markers.can_include_in_history = Some(1);
         assert!(matches!(decide_capture(r, &ctx()), CaptureDecision::Store(_)));
+    }
+
+    #[test]
+    fn remote_desktop_history_marker_is_ignored_but_password_markers_are_not() {
+        let mut r = raw(Some("p"));
+        r.source_exe = "MSTSC.EXE".into();
+        r.markers.can_include_in_history = Some(0);
+        assert!(matches!(decide_capture(r, &ctx()), CaptureDecision::Store(_)));
+        let mut r = raw(Some("p"));
+        r.source_exe = "WindowsSandboxRemoteSession.exe".into();
+        r.markers.can_include_in_history = Some(0);
+        r.markers.exclude_monitor = true;
+        assert_eq!(decide_capture(r, &ctx()), CaptureDecision::Skip(SkipReason::Marked));
+        let mut r = raw(Some("p"));
+        r.source_exe = "msrdc.exe".into();
+        r.markers.viewer_ignore = true;
+        assert_eq!(decide_capture(r, &ctx()), CaptureDecision::Skip(SkipReason::Marked));
     }
 
     #[test]

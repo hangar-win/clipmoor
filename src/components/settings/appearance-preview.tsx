@@ -13,7 +13,9 @@ import { samplePanel } from './sample-panel'
 const MAX_H = parseFloat(size.settingsPreviewH)
 
 const p = stylex.create({
-  stage: { position: 'sticky', top: 0, zIndex: z.raised, display: 'flex', justifyContent: 'center', margin: 0, paddingBlock: space.s16, backgroundColor: colors.settingsBg, borderBottomWidth: border.stroke, borderBottomStyle: 'solid', borderBottomColor: colors.settingsBorder },
+  stage: { position: 'sticky', top: 0, zIndex: z.raised, display: 'flex', justifyContent: 'center', margin: 0, paddingBlock: space.s16, backgroundColor: colors.settingsBg, borderBottomWidth: border.stroke, borderBottomStyle: 'solid', borderBottomColor: colors.settingsBorder,
+    '::before': { content: '""', position: 'absolute', insetInline: 0, bottom: '100%', height: space.s28, backgroundColor: colors.settingsBg },
+  },
   dark: { colorScheme: 'dark' },
   light: { colorScheme: 'light' },
   box: (w: number, h: number) => ({ flexShrink: 0, width: `${w}px`, height: `${h}px`, overflow: 'clip' }),
